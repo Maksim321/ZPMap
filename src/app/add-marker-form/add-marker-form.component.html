@@ -1,0 +1,37 @@
+<form #dataForm="ngForm" (ngSubmit)="onSubmit(dataForm)">
+  <div class="content-page-body-row">
+    <label for="title">Название</label>
+    <input id="title" type="text" value="" name="Title"  ngModel>
+  </div>
+  <div class="content-page-body-row">
+    <label for="category">Категория</label>
+    <select (change)="onChange($event.target.value)" id="list-categories" name="uidCategory" ngModel>
+      <option *ngFor='let category of arrayCategories' [value]='category.uidCategory' value='category.uidCategory'>{{category.NameCategories}}</option>
+    </select>
+  </div>
+  <div class="content-page-body-row">
+    <label for="subcategory">Подкатегория</label>
+    <select name="uidSubcategory" ngModel>
+      <ng-container *ngFor='let subcategory of arraySubcategories'>
+        <option [value]='subcategory.uidSubcategory'>{{subcategory.NameSubcategories}}</option>
+      </ng-container>
+    </select>
+  </div>
+  <div class="content-page-body-row">
+    <label for="about">Описание</label>
+    <textarea id="description" name="Description"  ngModel></textarea>
+  </div>
+  <div class="content-page-body-row">
+    <label for="address">Адрес</label>
+    <textarea id="address" *ngIf='mapService.getcurrentMarker' value="{{mapService.getcurrentMarker.Address}}" name="Address"  disabled></textarea>
+  </div>
+  <div class="content-page-body-row">
+    <label for="file-input">Загрузить изображение</label>
+    <input class="file-input" name="Image"
+            type="file" accept="image/jpg, image/jpeg, image/png, image/gif" 
+            (change)="savePhoto($event.target.files)">
+  </div>
+  <div class="content-page-body-row">
+    <button type="submit" >Добавить</button>
+  </div>
+</form>

@@ -1,0 +1,193 @@
+.left-block, a{
+  box-sizing: border-box;
+}
+
+.logo_text, .logo_img{
+  float: left;
+  height: 100%;
+}
+
+ul {
+  float: right;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+  
+}
+
+li {
+  float:left;
+  height:100%;
+  margin:0;
+  font-family: sans-serif;
+  font-weight: 700;
+}
+
+a{
+  text-decoration: none;
+  display: block;
+  color:#000;
+  height: 100%;
+  transition:0.2s;
+  -webkit-transition: 0.2s;
+}
+
+li a:hover{
+  background-color: #9e0059;
+  color: #fff;
+  cursor: pointer;
+}
+
+strong {
+  padding-top: 0px;
+  color: #9e0059;
+}
+
+.logo_link, .git-link{
+  background-size: contain;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+}
+
+.logo_link{
+  background-image: url("/assets/img/zp_logo.svg");
+}
+
+li .git-link{
+  background-image: url("/assets/img/git_icon-black.png");
+}
+
+li .git-link:hover{
+  background-image: url("/assets/img/git_icon-white.png");
+}
+
+@media screen and (min-width:100px){
+
+  .header_container{
+    height: 90px;
+    padding: 0 5px;
+  }
+
+  li {
+    font-size: 12px;
+  }
+
+  li a{
+    padding: 15px 7px;
+  }
+
+  li .git-link{
+    padding: 5px 2px;
+    width: 40px;
+  }
+
+  .logo_link{
+    width: 35px;
+  }
+
+  strong {
+    font-size: 20px;
+  }
+
+  .left-block, ul{
+    height: 50%;
+  } 
+
+  .left-block{
+    float: none;
+    padding: 2px 0;
+  }
+
+  .logo_img, .logo_text{
+    margin: 0 9px;
+  }
+}
+
+@media screen and (min-width:480px) {
+  .header_container{
+    height: 70px;
+    padding: 0 5px;
+  }
+
+  li {
+    font-size: 14px;
+  }  
+
+  li a{
+    padding: 27px 10px;
+  }
+
+  li .git-link{
+    padding: 15px 10px;
+    width: 60px;
+  }
+
+  .logo_link{
+    width: 40px;
+  }
+
+  .left-block, ul{
+    height: 100%;
+  }
+
+  .left-block{
+    float: left;
+    padding: 12px 0;
+  }
+
+  .logo_img, .logo_text{
+    margin: 0 10px
+  }
+
+  strong {
+    font-size: 22px;
+  }
+}
+
+@media screen and (min-width:768px) {
+
+  .header_container{
+    padding: 0 30px;
+  }
+
+  li {
+    font-size: 16px;
+  }
+
+  strong {
+    font-size: 30px;
+  }
+
+  li .git-link{
+    padding:8px;
+    width: 70px;
+  }
+
+  .logo_link{
+    width: 45px;
+  }
+
+  .left-block{
+    padding: 8px 0;
+  }
+
+  .logo_img, .logo_text{
+    margin: 0 10px
+  }
+}
+
+@media screen and (min-width:1000px) {
+
+}
+
+@media screen and (min-width:1366px) {
+
+}
+
+@media screen and (min-width:1600px) {
+
+}
+
+@media screen and (min-width:1900px) {
+
+}

@@ -1,0 +1,15 @@
+<div class="modal_form">
+  <app-loading-spinner *ngIf="modalDialogService.showSpinner"></app-loading-spinner>
+  <div class="content-page">
+    <div class="content-page-head">
+      <span *ngIf="modalDialogService.getOpenAddMarkerForm">Добавить новый объект</span>
+      <span *ngIf="modalDialogService.getOpenLoginForm">Авторизация</span>
+	  <span (click)="modalDialogService.closeModalForm()" id="modal_close">✖</span>
+	</div>
+	<div class="content-page-body">
+	  <add-marker-form *ngIf="modalDialogService.getOpenAddMarkerForm"></add-marker-form>
+	  <app-login-form *ngIf="modalDialogService.getOpenLoginForm"></app-login-form>
+	</div>
+  </div>
+</div>
+<div id="overlay"></div>

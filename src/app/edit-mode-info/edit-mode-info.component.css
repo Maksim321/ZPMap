@@ -1,0 +1,65 @@
+.add-point-info{
+  width:100%;
+  height:60px;
+  position:absolute;
+  z-index:5;
+  background: #787878;
+  opacity:0;
+  font: 16px sans-serif;
+  font-weight: 600;
+}
+
+.add-point-info-text{
+  color:white;
+  text-align: center;
+  width:85%;
+  float:left;
+  height:100%;
+}
+
+.add-point-info-text h3{
+  margin-left: 15%;
+}
+
+.add-point-info-cancel{
+  display: inline-block;
+  width: 15%;
+  height: 100%;
+  float: right;
+  transition-duration: 0.2s;
+  text-align: center;
+  color: white;
+  padding: 21px 0;
+  box-sizing: border-box;
+}
+
+.add-point-info-cancel:hover{
+  cursor: pointer;
+  background: #9e0059; 
+}
+
+
+@media screen and (min-width:100px){
+ 
+}
+
+@media screen and (max-width:480px){
+  .add-point-info-cancel{
+    font-size: 14px;
+    width: 20%;
+  }
+
+  .add-point-info-text{
+    width:80%;
+  }
+
+  .add-point-info-text h3{
+    margin-left: 10%;
+    font-size: 16px;
+    padding: 5px 0;
+  }
+}
+
+@media screen and (min-width:768px){
+ 
+}

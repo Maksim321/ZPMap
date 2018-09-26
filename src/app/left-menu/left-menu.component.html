@@ -1,0 +1,35 @@
+<div class="tabs">
+  <div *ngFor="let category of menuService.getSelectedCategories" class="content" 
+  [class.visible]="category.uidCategory == menuService.getSelectedCategoriesUID">
+	<div class="contentHead">
+      <div class="subcategoriesList">
+		<ng-container *ngFor='let subcategory of menuService.getSelectedSubcategories '>
+		  <div class="subcategoriesList_radio">
+			<input type="radio" (change)="menuService.setSelectedSubcategoriesUID = subcategory.uidSubcategory" 
+				[value]='subcategory.uidSubcategory' 
+				name="subcategoriesRadio">
+			<label for="subcategoriesLabel">{{subcategory.NameSubcategories}}</label>
+		  </div>
+		</ng-container>
+	  </div>
+	  <div class='subcategoriesButton'>
+		<button (click)="menuService.getMarkersBySubcategory()">Обновить</button>
+		<button (click)="menuService.clearPoints()">Очистить</button>	
+	  </div>
+	</div>
+	<div class="contentBody">
+	  <ng-container *ngFor='let marker of menuService.getSelectedMarkers'>
+		<app-card-point [marker]="marker"></app-card-point>
+	  </ng-container>	
+	</div>
+  </div>
+  <nav>
+    <a *ngFor='let category of menuService.getSelectedCategories'
+       (click)="menuService.openMenu(category.uidCategory)"
+       [class.selected]="category.uidCategory == menuService.getSelectedCategoriesUID"
+       [title]='category.NameCategories'>
+	  <img class="first" [src]='category.UrlImageCategories+"_black_72px.png"'/>
+	  <img class="second" [src]='category.UrlImageCategories+"_white_72px.png"'/>
+	</a>
+  </nav>
+</div>

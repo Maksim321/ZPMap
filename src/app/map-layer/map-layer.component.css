@@ -1,0 +1,65 @@
+::ng-deep .map{
+  height:100%;
+}
+
+::ng-deep .infowindow {
+  position: relative;
+  font-family: sans-serif;
+}
+
+::ng-deep .infowindow .infowindow-wrapper .photos{
+  text-align: center;
+}
+
+::ng-deep .infowindow .infowindow-wrapper .photos img{
+  width: 90%;
+  max-height: 380px;
+}
+
+::ng-deep .infowindow li {
+  list-style: none;
+  position: relative;
+  padding-left: 12px;
+  margin: 5px 0;
+}
+
+::ng-deep .infowindow ul {
+  padding: 0;
+}
+
+::ng-deep .infowindow li:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '–';
+}
+
+
+@media screen and (min-width:100px) {
+  ::ng-deep .infowindow {
+    width: 200px;
+    height: 350px;
+  }
+
+  ::ng-deep .infowindow .infowindow-wrapper {
+    padding: 10px 0 0 10px;
+  }
+}
+
+@media screen and (min-width:480px) {
+  ::ng-deep .infowindow {
+    width: 300px;
+    height: 450px;
+  }
+
+  ::ng-deep .infowindow .infowindow-wrapper {
+    padding: 15px 0 0 20px;
+  }
+}
+
+@media screen and (min-width:768px) {
+  ::ng-deep .infowindow {
+    width: 350px;
+    height: auto;
+  }
+}

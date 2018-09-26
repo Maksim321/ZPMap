@@ -1,0 +1,23 @@
+<div *ngIf="messageService.messages.length" class="alert-container">
+  <ng-container *ngFor="let message of messageService.messages">
+    <app-alert [message]="message"></app-alert>
+  </ng-container> 
+</div>
+<app-modal-dialog *ngIf="modalDialogService.getOpenModalForm"></app-modal-dialog>
+<header>
+  <app-header></app-header>
+</header>
+<div class="container">
+  <app-edit-mode-info *ngIf="this.editModeInfoService.getEditModeState"></app-edit-mode-info>
+  <div class="left-menu">
+	  <app-left-menu></app-left-menu>
+  </div>	
+  <div class="map" (click)="clickOnMap()">
+	  <app-map-layer></app-map-layer>
+  </div>
+
+  <div class="add-marker-button">
+    <span>ADD</span>
+    <a class="edit-mode-link" *ngIf="authService.loggedIn !== null" (click)="runEditMode()">Добавить метку</a>
+  </div>
+</div>

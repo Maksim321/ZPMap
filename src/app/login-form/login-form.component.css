@@ -1,0 +1,174 @@
+form{
+  font-family: sans-serif;
+}
+
+input{
+  border: 1px solid #c1c1c1;
+  border-radius: 2px;
+	padding:10px;
+	outline:none;
+	width: 100%;
+	font-size: 16px;
+	box-sizing:border-box
+}
+
+button, input:focus, .google_login-link {
+  border: 1px solid #9e0059;
+}
+
+button{
+  padding: 10px 12px;
+	overflow: hidden;
+	vertical-align: middle;
+  color: #fff;
+  background-color: #bd347a;
+}
+
+button:hover{
+	background-color: #9e0059;
+	color: #fff;
+}
+
+.login-lbl{
+  display: block;
+  width: 100%;
+	float: left;
+	color: #9e0059;
+}
+
+.link, button, input{
+	transition:0.3s;
+	-webkit-transition: 0.3s;
+}
+
+button, .link{
+	cursor: pointer;
+}
+
+
+.google_login-link, button{
+	font-weight: 700;
+	font-size:14px;
+	border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.google_login-link, button, .login-lbl{
+  box-sizing: border-box;
+}
+
+.google_login-link{
+	display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+  height: 36px;
+}
+
+.google_login_link-img{
+  height: 25px;
+  display: block;
+  margin-left: 2px;
+  padding: 5px;
+  float: left;
+}
+
+.google_login_link-text{
+  float: left;
+  margin-left: 10px;
+  padding: 9px 0;
+  color: #fff;
+}
+
+.register_switch-link{
+	border-bottom: 1px dotted #000;
+}
+
+.register_switch-link:hover{
+	border-bottom: 1px solid #000;
+}
+
+.content-page-body-row:last-child{
+	text-align: center;
+}
+
+
+@media screen and (min-width:100px) {
+  form{
+	  width: 100%;
+  }
+
+  .google_login-link, button{
+	  width: 100%;
+  }
+
+  .google_login-link{
+	  background-color: #9e0059;
+	  margin-bottom: 10px;
+  }
+
+  .content-page-body-row{
+    margin: 7px 0;
+  }
+
+  .login-lbl{
+    padding: 5px;
+  }
+}
+
+@media screen and (min-width:480px) {
+  form{
+	  width: 425px;
+  }
+
+  .content-page-body-row{
+    margin: 10px 0;
+  }
+
+  .login-lbl{
+    padding: 8px;
+  }
+}
+
+@media screen and (min-width:768px) {
+
+  .content-page-body-row{
+    margin: 15px 0;
+  }
+
+  button{
+	  width: 370px;
+	  margin-left: 15px;
+  }
+
+  .google_login-link{
+	  width: 40px;
+	  background-color: #fff;
+	  margin-bottom: 0;
+  }
+
+  .google_login-link:hover{
+    width: 285px;
+	  box-shadow: inset 0px 0px 0px 0px #333;
+	  background-color: #9e0059;
+  }
+
+  .google_login-link:hover ~ button{
+	  width: 125px;
+  }
+}
+
+@media screen and (min-width:1000px) {
+
+}
+
+@media screen and (min-width:1366px) {
+
+}
+
+@media screen and (min-width:1600px) {
+
+}
+
+@media screen and (min-width:1900px) {
+
+}

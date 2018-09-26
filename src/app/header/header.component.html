@@ -1,0 +1,36 @@
+<div class="header_container">
+  <div class="left-block">
+    <div class="logo_img">
+      <a href="/" class="logo_link"></a>
+    </div>
+    <div class="logo_text">
+      <strong>Запоріжжя</strong><br>
+      <span>Відкрита мапа</span>
+    </div>
+  </div>
+  <ul>
+    <ng-container *ngIf="authService.loggedIn !== null">
+      <ng-container *ngIf="authService.loggedIn; then first else second"></ng-container>
+      <ng-template #first>
+        <li>
+          <a class="header-login-link">
+            {{authService.authState.displayName}}
+          </a>
+        </li>
+        <li>
+          <a href="/" class="header-login-link" (click)="LogOut()">
+            Выход
+          </a>
+        </li>
+      </ng-template>
+      <ng-template #second>
+        <li (click)="LogIn()">
+          <a>Войти</a>
+        </li>
+      </ng-template>
+    </ng-container>
+    <li>
+      <a class="git-link"></a>
+    </li>
+  </ul>
+</div>
