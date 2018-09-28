@@ -9,9 +9,9 @@ export class MessageService {
 
   messages:Message[] = [];
   constructor() { }
- 
-  clear() {
-    this.messages = [];
+
+  get getMessage(): Message[]{
+    return this.messages;
   }
 
   private pushMessages(strong, text, className){
@@ -36,5 +36,9 @@ export class MessageService {
 
   errorMessages(strong, text){
     this.pushMessages(strong, text, "");
+  }
+
+  clear() {
+    this.messages = [];
   }  
 }

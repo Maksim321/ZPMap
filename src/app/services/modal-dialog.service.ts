@@ -19,7 +19,7 @@ export class ModalDialogService {
 
   get getOpenAddMarkerForm():boolean {
     return this.isOpenAddMarkerForm;
-   }
+  }
 
   openModalForm() { 
     this.isOpenModalForm = true; 

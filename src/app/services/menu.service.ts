@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MapService } from '../services/map.service';
-import { ApiService } from "../services/api.service";
+import { MapService } from './map.service';
+import { SubscribingToDataService } from "./subscribing-to-data.service";
 import * as $ from 'jquery';
 
 import { Marker } from '../marker';
@@ -16,32 +16,13 @@ export class MenuService {
   private selectedCategoriesUID:string;
   private selectedSubcategoriesUID:string;
 
-  selectedMarkers:Marker[] = [];
-  selectedCategories: Categories[];
-  selectedSubcategories: Subcategories[];
-
-  constructor(private menuService: MenuService,
-              private mapService: MapService,
-              private apiService: ApiService) {
-    this.apiService.getCategoriesCollection().subscribe(selectedCategories => this.selectedCategories = selectedCategories);
-
+  constructor(private mapService: MapService,
+              private subscribingToDataService: SubscribingToDataService) {
 	  window.addEventListener('resize', ()=> {
       if(!this.getMenuStatus){
   		  $(".left-menu").css( "margin-left" , -$(".left-menu").width()+ $(".tabs nav").width());
   	  }
   	}, false);
-  }
-
-  get getSelectedMarkers():Marker[] {
-    return this.selectedMarkers;
-  }
-
-  get getSelectedCategories():Categories[] {
-    return this.selectedCategories;
-  }
-
-  get getSelectedSubcategories():Subcategories[] {
-    return this.selectedSubcategories;
   }
 
   get getMenuStatus():boolean {
@@ -73,43 +54,66 @@ export class MenuService {
   }
 
   getMarkersBySubcategory(){
-    this.selectMarkers("uidSubcategory", this.getSelectedSubcategoriesUID);  
+    this.selectMarkers("uidSubcategory", this.getSelectedSubcategoriesUID);   
   }   
 
-  selectSubcategoriesCollection(uidCategory){
-    this.apiService.getSubcategoriesCollection(uidCategory)
-      .subscribe(selectedSubcategories => this.selectedSubcategories = selectedSubcategories);
+  private selectSubcategories(uidCategory){
+    this.subscribingToDataService.selectSubcategories(uidCategory).then(a=>{
+      this.getMarkersByCategory(uidCategory);
+    });   
   }
 
-  selectMarkers(property, value){
+  private selectMarkers(property, value){
     if(property&&value){
-      this.apiService.getMarkers(property, value).subscribe(markers => {
-        this.selectedMarkers = markers;
-        this.mapService.placeArrayMarkers(markers, this.selectedCategories, this.selectedSubcategories);   
-      });  
+      this.subscribingToDataService.selectMarkers(property, value).then(markers=>{
+        this.clearMarkers();
+        this.mapService.placeArrayMarkers(markers, 
+          this.subscribingToDataService.getSelectedCategories, 
+          this.subscribingToDataService.getSelectedSubcategories
+        );
+      });
     }
   } 
 
-  openMenu(uidCategory){
+  openOrCloseMenu(uidCategory){
   	if(this.getMenuStatus && this.getSelectedCategoriesUID === uidCategory){
-  	  $(".left-menu").animate({marginLeft:0 - $(".left-menu").width() + $(".tabs nav").width()},300);
-  	  this.setMenuStatus = false;
+  	  this.closeMenu();
   	}
   	else{
-  	  $(".left-menu").animate({marginLeft:0},300);
-
-      this.clearPoints();
-  	  this.setMenuStatus = true;
-      this.setSelectedSubcategoriesUID = "";
-      this.setSelectedCategoriesUID = uidCategory;
-      this.selectSubcategoriesCollection(uidCategory);
-      this.getMarkersByCategory(uidCategory);
+  	  this.openMenu(uidCategory);
   	}
- 
   }
 
-  clearPoints(){
-    this.selectedMarkers = [];
+  closeMenu(){
+    $(".left-menu").animate({marginLeft:0 - $(".left-menu").width() + $(".tabs nav").width()},300);
+    this.setMenuStatus = false;
+  }
+
+  openMenu(uidCategory){
+    $(".left-menu").animate({marginLeft:0},300);
+    this.setMenuStatus = true;
+    this.setSelectedSubcategoriesUID = "";
+    this.setSelectedCategoriesUID = uidCategory;
+    this.selectSubcategories(uidCategory);
+  }
+
+  hideMenu(){
+    return new Promise<boolean>((resolve, reject) => {
+      $('.left-menu').animate({marginLeft: - $(".left-menu").width()},200,()=>{
+        this.setMenuStatus = false;
+        resolve(true)
+      });
+    });     
+  }
+
+  showMenu(){
+    return new Promise<boolean>((resolve, reject) => {
+      $('.left-menu').animate({marginLeft:0 - $(".left-menu").width() + $(".tabs nav").width()}, 200,
+        ()=>resolve(true));
+    });     
+  }
+
+  clearMarkers(){
     this.mapService.deleteMarkers();
   } 
 }

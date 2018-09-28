@@ -24,11 +24,10 @@ export class EditModeInfoService {
   openEditMode(){
   	if(this.authService.loggedIn){
   	  this.isEditMode = true;
-      this.menuService.setMenuStatus = false;
-  	  $('.left-menu').animate({marginLeft: - $(".left-menu").width()},200, ()=>{
-  	  	$('.add-point-info').animate({opacity: 0.9}, 200);
-  	  });
-  	  $('.map').css('cursor', 'crosshair');
+  	  this.menuService.hideMenu().then(()=>{
+        $('.add-point-info').animate({opacity: 0.9}, 200);
+        $('.map').css('cursor', 'crosshair');
+      });
   	}
   	else{
   	  this.messageService.warningMessages("Warning:", "Войдите или зарегистрируйтесь!")
@@ -38,9 +37,9 @@ export class EditModeInfoService {
 
   cancelEditMode(){
   	$('.add-point-info').animate({opacity: 0}, 200,()=>{
-  	  $('.left-menu').animate({marginLeft:0 - $(".left-menu").width() + $(".tabs nav").width()}, 200);
-  	  this.isEditMode = false;
+      this.isEditMode = false;
+      $('.map').css('cursor', 'default');
+  	  this.menuService.showMenu();
   	});
-  	$('.map').css('cursor', 'default');
   }  
 }

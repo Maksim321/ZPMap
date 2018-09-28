@@ -56,7 +56,7 @@ export class MapService {
     });
   }
   
-  setMarker(lat, lon){
+  setMarker(lat, lon){  
     let marker = new google.maps.Marker({
       position: new google.maps.LatLng(lat, lon),
       map: this.map
@@ -93,25 +93,13 @@ export class MapService {
     this.markers = [];
   }
   
-  placeMarker(location) {	  
-  	if (this.marker === undefined){
-        this.marker = new google.maps.Marker({
-          position: location,
-          map: this.map
-        });
-  	} 
-  	else {   
-  	  this.marker.setPosition(location); 
-  	}
-  	this.map.panTo(location);
-  }
-  
   teleportToMarker(marker:Point){
     this.getMap.panTo(new google.maps.LatLng(marker.Lat, marker.Lon));
     this.getMap.setZoom(17);
   }
   
   placeArrayMarkers(arrayMarkets, categories,subcategories) {
+    this.deleteMarkers();
     arrayMarkets.forEach(marker=>{
       if(marker.Image){
         this.apiService.convertImage(marker.Image).subscribe(value=>{

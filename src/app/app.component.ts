@@ -11,8 +11,6 @@ import { MapService } from './services/map.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  isCreateMode:boolean = false;
-  isOpenModalForm:boolean = false;
  
   constructor(public messageService: MessageService,
   			      public modalDialogService: ModalDialogService,

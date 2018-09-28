@@ -22,7 +22,6 @@
 }
 
 .containerLeft{
-	/*width:calc(85% - 1px);*/
 	width:calc(100% - 1px);
 	float: left;
 	height:100%;

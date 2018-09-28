@@ -28,13 +28,13 @@ export class AuthService {
   
   doGoogleLogin(){
     return new Promise<any>((resolve, reject) => {
-	  let provider = new firebase.auth.GoogleAuthProvider();
-	  provider.addScope('profile');
-	  provider.addScope('email');
-	  this.afAuth.auth.signInWithPopup(provider).then(res => {
-	    resolve(res);
+  	  let provider = new firebase.auth.GoogleAuthProvider();
+  	  provider.addScope('profile');
+  	  provider.addScope('email');
+  	  this.afAuth.auth.signInWithPopup(provider).then(res => {
+  	    resolve(res);
+  	  })
 	  })
-	})
   }
 
   doRegister(value){

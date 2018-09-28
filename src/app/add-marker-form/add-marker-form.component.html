@@ -6,13 +6,13 @@
   <div class="content-page-body-row">
     <label for="category">Категория</label>
     <select (change)="onChange($event.target.value)" id="list-categories" name="uidCategory" ngModel>
-      <option *ngFor='let category of arrayCategories' [value]='category.uidCategory' value='category.uidCategory'>{{category.NameCategories}}</option>
+      <option *ngFor='let category of subscribingToDataService.getSelectedCategories' [value]='category.uidCategory' value='category.uidCategory'>{{category.NameCategories}}</option>
     </select>
   </div>
   <div class="content-page-body-row">
     <label for="subcategory">Подкатегория</label>
     <select name="uidSubcategory" ngModel>
-      <ng-container *ngFor='let subcategory of arraySubcategories'>
+      <ng-container *ngFor='let subcategory of subscribingToDataService.getSelectedSubcategories'>
         <option [value]='subcategory.uidSubcategory'>{{subcategory.NameSubcategories}}</option>
       </ng-container>
     </select>

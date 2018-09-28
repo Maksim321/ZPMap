@@ -5,6 +5,7 @@ import { ApiService } from "../services/api.service";
 import { MessageService } from '../services/message.service';
 import { MapService } from '../services/map.service';
 import { ModalDialogService } from '../services/modal-dialog.service';
+import { SubscribingToDataService } from "../services/subscribing-to-data.service";
 
 import { Subcategories } from '../subcategories';
 import { Categories } from '../categories';
@@ -20,24 +21,22 @@ export class AddMarkerFormComponent implements OnInit {
   lat:number;
   address:string;  
   file: any;
-  arrayCategories: Categories[];
-  arraySubcategories: Subcategories[];
+  selectedCategories: Categories[];
+  selectedSubcategories: Subcategories[];
   selectedCategoriesID:string;
 
-  constructor(public modalDialogService: ModalDialogService,
+  constructor(public subscribingToDataService: SubscribingToDataService,
+              public modalDialogService: ModalDialogService,
               private authService: AuthService,
               private apiService: ApiService,
               private messageService: MessageService,
               public mapService: MapService) { }
 
-  ngOnInit() {
-    this.apiService.getCategoriesCollection().subscribe(arrayCategories => this.arrayCategories = arrayCategories);
-  }
+  ngOnInit() {}
 
   onChange(changedValue){
     this.selectedCategoriesID = changedValue;
-    this.apiService.getSubcategoriesCollection(changedValue)
-      .subscribe(arraySubcategories => this.arraySubcategories = arraySubcategories);  
+    this.subscribingToDataService.selectSubcategories(changedValue);
   }
 
   savePhoto(event) {
@@ -92,8 +91,8 @@ export class AddMarkerFormComponent implements OnInit {
   }
   
   isEmptyForm(dataForm: NgForm){
-    if(dataForm.value['TitlePoint']!==""&&dataForm.value['DescriptionPoint']!==""&&
-       dataForm.value['ID_Categories']!==""&&dataForm.value['ID_Subcategories']!==""){
+    if(dataForm.value.Title!==""&&dataForm.value.Description!==""&&
+       dataForm.value.uidCategory!==""&&dataForm.value.uidSubcategory!==""){
       return true;
     }
     else{
