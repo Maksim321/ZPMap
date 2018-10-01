@@ -1,5 +1,5 @@
 <div class="modal_form">
-  <app-loading-spinner *ngIf="modalDialogService.showSpinner"></app-loading-spinner>
+  <app-loading-spinner *ngIf="modalDialogService.getSpinnerStatus"></app-loading-spinner>
   <div class="content-page">
     <div class="content-page-head">
       <span *ngIf="modalDialogService.getOpenAddMarkerForm">Добавить новый объект</span>

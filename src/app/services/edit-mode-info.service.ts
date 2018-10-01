@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { MessageService } from './message.service';
 import { ModalDialogService } from './modal-dialog.service';
 import { AuthService } from './auth.service';
-import { MenuService } from '../services/menu.service';
 import * as $ from 'jquery';
 
 @Injectable({
@@ -10,36 +9,27 @@ import * as $ from 'jquery';
 })
 export class EditModeInfoService {
 
-  isEditMode:boolean = false;
+  private isEditMode:boolean = false;
 
   constructor(public messageService: MessageService,
   			      public modalDialogService: ModalDialogService,
-              private authService: AuthService,
-              private menuService: MenuService) { }
+              private authService: AuthService) { }
 
   get getEditModeState(): boolean {
     return this.isEditMode;
   }
 
   openEditMode(){
-  	if(this.authService.loggedIn){
-  	  this.isEditMode = true;
-  	  this.menuService.hideMenu().then(()=>{
-        $('.add-point-info').animate({opacity: 0.9}, 200);
-        $('.map').css('cursor', 'crosshair');
-      });
-  	}
-  	else{
-  	  this.messageService.warningMessages("Warning:", "Войдите или зарегистрируйтесь!")
-  	  this.modalDialogService.openLoginForm();
-	  }
+    if(this.authService.loggedIn){
+      this.isEditMode = true;
+    }
+    else{
+      this.messageService.warningMessages("Warning:", "Войдите или зарегистрируйтесь!")
+      this.modalDialogService.openLoginForm();
+    }
   }
 
   cancelEditMode(){
-  	$('.add-point-info').animate({opacity: 0}, 200,()=>{
-      this.isEditMode = false;
-      $('.map').css('cursor', 'default');
-  	  this.menuService.showMenu();
-  	});
-  }  
+    this.isEditMode = false;
+  }
 }

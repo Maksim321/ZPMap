@@ -1,15 +1,19 @@
 import { Injectable, NgZone } from '@angular/core';
 import { ApiService } from "./api.service";
+
+import { Marker } from '../marker';
+import { Subcategories } from '../subcategories';
+import { Categories } from '../categories';
 import { Point } from '../point';
 
 @Injectable()
 export class MapService {
   
   private map: any;
-  private marker: any;
   private markers: Array<any> = [];
   private geocoder: any;
-  private currentMarker: Point;
+  private currentMarker: Point = new Point;
+
   constructor(private ngZone: NgZone,
               private apiService: ApiService) {
 	  this.geocoder = new google.maps.Geocoder();
@@ -43,41 +47,40 @@ export class MapService {
   }
   
   initMapClickEvents() {
-  	google.maps.event.addListener(this.map, 'click', (event)=> {
-  	  this.geocoder.geocode({'latLng': event.latLng}, (results, status)=> {
-    		if (status === google.maps.GeocoderStatus.OK&&results[0]) {
-    		  this.currentMarker = {
-    		    "Address": results[0].formatted_address,
-    			  "Lat": event.latLng.lat(),
-    			  "Lon": event.latLng.lng()
-    		  }
-    		}
-  	  });
-    });
+    this.initMapMouseEvents('click');
   }
+
+  initMapMouseMoveEvents() {
+    this.initMapMouseEvents('mousemove');
+  }
+
+  private initMapMouseEvents(event) {
+    google.maps.event.addListener(this.map, event, (event)=> {
+      this.geocoder.geocode({'latLng': event.latLng}, (results, status)=> {
+        if (status === google.maps.GeocoderStatus.OK&&results[0]) {
+          this.currentMarker = {
+            "Address": results[0].formatted_address,
+            "Lat": event.latLng.lat(),
+            "Lon": event.latLng.lng()
+          }
+        }
+      });
+    });
+  }  
   
-  setMarker(lat, lon){  
+  setMarker(point:Point){  
     let marker = new google.maps.Marker({
-      position: new google.maps.LatLng(lat, lon),
+      position: new google.maps.LatLng(point.Lat, point.Lon),
       map: this.map
     });
   	this.markers.push(marker);
   	return marker;
   }
-
-  setMapOnAll(map) {
-    for (let i = 0; i < this.markers.length; i++) {
-      this.markers[i].setMap(map);
-    }
-  }
   
   setInfoWindowMap(marker, contentString){
-  	let infowindow = new google.maps.InfoWindow();
-  	google.maps.event.addListener(marker, 'click', (function(marker) {
-        return function() {
-          infowindow = new google.maps.InfoWindow({
-            content: contentString
-  		  });
+  	google.maps.event.addListener(marker, 'click', ((marker)=>{
+        return ()=>{
+          let infowindow = new google.maps.InfoWindow({content: contentString});
           infowindow.open(this.map, marker);
         }
     })(marker));
@@ -85,11 +88,16 @@ export class MapService {
  
  
   clearMarkers() {
-    this.setMapOnAll(null);
+    for (let i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(null);
+    }
   }
 	  
   deleteMarkers() {
-    this.clearMarkers();
+    //this.clearMarkers();
+    for (let i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(null);
+    }
     this.markers = [];
   }
   
@@ -98,23 +106,23 @@ export class MapService {
     this.getMap.setZoom(17);
   }
   
-  placeArrayMarkers(arrayMarkets, categories,subcategories) {
+  placeArrayMarkers(arrayMarkets:Marker[], categories:Categories[],subcategories:Subcategories[]) {
     this.deleteMarkers();
     arrayMarkets.forEach(marker=>{
       if(marker.Image){
         this.apiService.convertImage(marker.Image).subscribe(value=>{
-          this.setInfoWindowMap(this.setMarker(marker.Lat, marker.Lon), 
+          this.setInfoWindowMap(this.setMarker({Address:"", Lat:marker.Lat, Lon:marker.Lon}), 
             this.createHtmlContent(marker,categories,subcategories, value));
         });
       }  
       else{
-        this.setInfoWindowMap(this.setMarker(marker.Lat, marker.Lon), 
+        this.setInfoWindowMap(this.setMarker({Address:"", Lat:marker.Lat, Lon:marker.Lon}), 
           this.createHtmlContent(marker,categories,subcategories, "assets/img/no_photo.jpg"));
       }
     });
   }
 
-  createHtmlContent(marker, categories,subcategories, image){
+  private createHtmlContent(marker, categories,subcategories, image){
 	let contentString = '<div class="infowindow">'+
 						  '<div class="infowindow-wrapper">'+
 						    '<div class="photos">'+

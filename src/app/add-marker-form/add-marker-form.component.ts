@@ -45,7 +45,7 @@ export class AddMarkerFormComponent implements OnInit {
 
   onSubmit(dataForm: NgForm){
     if(this.isEmptyForm(dataForm)){
-      this.modalDialogService.showSpinner = true;
+      this.modalDialogService.setSpinnerStatus = true;
       if(this.file){
         this.loadImagePoint(dataForm);
       }
@@ -58,7 +58,7 @@ export class AddMarkerFormComponent implements OnInit {
   loadImagePoint(dataForm: NgForm){
     if (this.file.type.split('/')[0] !== 'image') { 
       this.messageService.errorMessages("Error:","Неподдерживаемый тип файла!");
-      this.modalDialogService.showSpinner = false;
+      this.modalDialogService.setSpinnerStatus = false;
       return;
     }
 
@@ -69,7 +69,7 @@ export class AddMarkerFormComponent implements OnInit {
       dataForm.value['Image'] = pathImage;
       this.loadPointForm(dataForm);
     }, err=>{
-      this.modalDialogService.showSpinner = false;
+      this.modalDialogService.setSpinnerStatus = false;
       this.messageService.errorMessages("Error:","Ошибка при загрузке изображения - ["+err.message+"]");
     });
   }
@@ -82,10 +82,10 @@ export class AddMarkerFormComponent implements OnInit {
     dataForm.value['Date'] = new Date();
     this.apiService.addMarker(dataForm.value).then(res => {
       this.messageService.successMessages("Ура!:","Метка успешно добавлена!");
-      this.modalDialogService.showSpinner = false;
+      this.modalDialogService.setSpinnerStatus = false;
       this.modalDialogService.closeModalForm();
     }, err=>{
-      this.modalDialogService.showSpinner = false;
+      this.modalDialogService.setSpinnerStatus = false;
       this.messageService.errorMessages("Error:","Ошибка при загрузке информации о метке - ["+err.message+"]");
     });
   }
@@ -97,7 +97,7 @@ export class AddMarkerFormComponent implements OnInit {
     }
     else{
       this.messageService.warningMessages("Алё:","Заполните все поля!");
-      this.modalDialogService.showSpinner = false;
+      this.modalDialogService.setSpinnerStatus = false;
       return false;
     }
   }

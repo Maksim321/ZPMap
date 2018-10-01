@@ -25,7 +25,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   tryGoogleLogin(){
-    this.modalDialogService.showSpinner = true;
+    this.modalDialogService.setSpinnerStatus = true;
     this.authService.doGoogleLogin().then(res => {
       this.messageService.successMessages("Ура!", "Успешно авторизировались!"); 
       this.success();
@@ -33,13 +33,13 @@ export class LoginFormComponent implements OnInit {
   }
 
   tryLogin(value){
-    this.modalDialogService.showSpinner = true;
+    this.modalDialogService.setSpinnerStatus = true;
     if(!this.isRegister){
         this.authService.doLogin(value).then(res => {
         this.messageService.successMessages("Ура!", "Успешно авторизировались!");  
         this.success();
       }, err => {
-        this.modalDialogService.showSpinner = false;
+        this.modalDialogService.setSpinnerStatus = false;
         this.messageService.errorMessages("Error", err.message);
       });
     }
@@ -55,17 +55,17 @@ export class LoginFormComponent implements OnInit {
         this.success();
       }, err => {
         this.messageService.errorMessages("Error", err.message);
-        this.modalDialogService.showSpinner = false;
+        this.modalDialogService.setSpinnerStatus = false;
       });
     }
     else{
-      this.modalDialogService.showSpinner = false; 
+      this.modalDialogService.setSpinnerStatus = false; 
       this.messageService.errorMessages("Error", "Введите имя!");
     }
   }
 
   success(){
-    this.modalDialogService.showSpinner = false;
+    this.modalDialogService.setSpinnerStatus = false;
     this.modalDialogService.closeModalForm();    
   }
 

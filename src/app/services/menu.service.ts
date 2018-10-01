@@ -17,13 +17,7 @@ export class MenuService {
   private selectedSubcategoriesUID:string;
 
   constructor(private mapService: MapService,
-              private subscribingToDataService: SubscribingToDataService) {
-	  window.addEventListener('resize', ()=> {
-      if(!this.getMenuStatus){
-  		  $(".left-menu").css( "margin-left" , -$(".left-menu").width()+ $(".tabs nav").width());
-  	  }
-  	}, false);
-  }
+              private subscribingToDataService: SubscribingToDataService) {}
 
   get getMenuStatus():boolean {
     return this.menuStatus;
@@ -58,7 +52,7 @@ export class MenuService {
   }   
 
   private selectSubcategories(uidCategory){
-    this.subscribingToDataService.selectSubcategories(uidCategory).then(a=>{
+    this.subscribingToDataService.selectSubcategories(uidCategory).then(()=>{
       this.getMarkersByCategory(uidCategory);
     });   
   }
@@ -73,24 +67,13 @@ export class MenuService {
         );
       });
     }
-  } 
-
-  openOrCloseMenu(uidCategory){
-  	if(this.getMenuStatus && this.getSelectedCategoriesUID === uidCategory){
-  	  this.closeMenu();
-  	}
-  	else{
-  	  this.openMenu(uidCategory);
-  	}
   }
 
   closeMenu(){
-    $(".left-menu").animate({marginLeft:0 - $(".left-menu").width() + $(".tabs nav").width()},300);
     this.setMenuStatus = false;
   }
 
   openMenu(uidCategory){
-    $(".left-menu").animate({marginLeft:0},300);
     this.setMenuStatus = true;
     this.setSelectedSubcategoriesUID = "";
     this.setSelectedCategoriesUID = uidCategory;

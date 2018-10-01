@@ -1,7 +1,6 @@
 import { Component, Inject, ElementRef, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MapService } from '../services/map.service';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-map-layer',
@@ -23,5 +22,6 @@ export class MapLayerComponent implements OnInit {
 
   ngOnInit() {
 	  this.mapService.initMapClickEvents();
+    this.mapService.initMapMouseMoveEvents();
   }
 }

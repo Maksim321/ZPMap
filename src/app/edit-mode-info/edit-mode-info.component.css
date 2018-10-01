@@ -1,4 +1,4 @@
-.add-point-info{
+.add-marker-info{
   width:100%;
   height:60px;
   position:absolute;
@@ -9,7 +9,7 @@
   font-weight: 600;
 }
 
-.add-point-info-text{
+.add-marker-info-text{
   color:white;
   text-align: center;
   width:85%;
@@ -17,11 +17,11 @@
   height:100%;
 }
 
-.add-point-info-text h3{
+.add-marker-info-text h3{
   margin-left: 15%;
 }
 
-.add-point-info-cancel{
+.add-marker-info-cancel{
   display: inline-block;
   width: 15%;
   height: 100%;
@@ -33,9 +33,43 @@
   box-sizing: border-box;
 }
 
-.add-point-info-cancel:hover{
+.add-marker-info-cancel:hover{
   cursor: pointer;
   background: #9e0059; 
+}
+
+
+.current-point-info {
+  position: fixed;
+  border: 2px solid #9e0059;
+  border-radius: 5px;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.wrap{
+  padding: 0 10px;
+  color: #9e0059;
+  max-width: 350px;
+  font: 12px sans-serif;
+  font-weight: 700;
+  z-index: 20;
+  position: relative; 
+}
+
+.current-point-info:after{
+  content: "";
+  position: absolute;
+  -webkit-transform: translateX(40%) translateY(-45%) rotate(50deg);
+  transform: translateX(40%) translateY(-45%) rotate(50deg);
+  -webkit-transform-origin: 50%;
+  transform-origin: 50%;
+  width: 20px;
+  height: 24px;
+  border: 2px solid #9e0059;
+  border-top: none;
+  border-left: none;
+  background: #fff;
 }
 
 
@@ -44,16 +78,16 @@
 }
 
 @media screen and (max-width:480px){
-  .add-point-info-cancel{
+  .add-marker-info-cancel{
     font-size: 14px;
     width: 20%;
   }
 
-  .add-point-info-text{
+  .add-marker-info-text{
     width:80%;
   }
 
-  .add-point-info-text h3{
+  .add-marker-info-text h3{
     margin-left: 10%;
     font-size: 16px;
     padding: 5px 0;

@@ -7,7 +7,11 @@ export class ModalDialogService {
 
   private isOpenLoginForm:boolean = false;
   private isOpenAddMarkerForm:boolean = false;
-  showSpinner: boolean = false;
+  private spinnerStatus: boolean = false;
+
+  get getSpinnerStatus():boolean {
+    return this.spinnerStatus;
+  }
 
   get getOpenModalForm():boolean {
     return this.isOpenModalForm;
@@ -19,6 +23,10 @@ export class ModalDialogService {
 
   get getOpenAddMarkerForm():boolean {
     return this.isOpenAddMarkerForm;
+  }
+
+  set setSpinnerStatus(status:boolean) {
+    this.spinnerStatus = status;
   }
 
   openModalForm() { 
@@ -39,7 +47,7 @@ export class ModalDialogService {
   closeModalForm() {
     $('.modal_form').animate({opacity: 0, top: '30%'}, 300, ()=>{ 
       $('#overlay').fadeOut(300,()=>{
-        this.showSpinner = false;
+        this.setSpinnerStatus = false;
         this.isOpenModalForm = false; 
         this.closeLoginForm();
         this.closeAddMarkerForm(); 

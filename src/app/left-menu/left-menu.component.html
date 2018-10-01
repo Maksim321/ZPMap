@@ -5,7 +5,7 @@
       <div class="subcategoriesList">
 		<ng-container *ngFor='let subcategory of subscribingToDataService.getSelectedSubcategories '>
 		  <div class="subcategoriesList_radio">
-			<input type="radio" (change)="menuService.setSelectedSubcategoriesUID = subcategory.uidSubcategory" 
+			<input type="radio" (change)="menuService.setSelectedSubcategoriesUID = subcategory.uidSubcategory"
 				[value]='subcategory.uidSubcategory' 
 				name="subcategoriesRadio">
 			<label for="subcategoriesLabel">{{subcategory.NameSubcategories}}</label>
@@ -25,7 +25,7 @@
   </div>
   <nav>
     <a *ngFor='let category of subscribingToDataService.getSelectedCategories'
-       (click)="menuService.openOrCloseMenu(category.uidCategory)"
+       (click)="openOrCloseMenu(category.uidCategory)"
        [class.selected]="category.uidCategory == menuService.getSelectedCategoriesUID"
        [title]='category.NameCategories'>
 	  <img class="first" [src]='category.UrlImageCategories+"_black_72px.png"'/>
