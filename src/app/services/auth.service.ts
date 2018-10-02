@@ -44,8 +44,6 @@ export class AuthService {
         res.user.updateProfile({
           displayName: value.displayName,
           photoURL: ""
-        }).then(function() {
-        }).catch(function(error) {
         });
         resolve(res);
       }, err => reject(err))

@@ -11,11 +11,11 @@ import * as $ from 'jquery';
 
 export class LeftMenuComponent implements OnInit {
 
-  constructor(private subscribingToDataService: SubscribingToDataService,
-  			  public menuService: MenuService) {}
+  constructor(public subscribingToDataService: SubscribingToDataService,
+  			      public menuService: MenuService) {}
 
   ngOnInit() {
-	window.addEventListener('resize', ()=> {
+	  window.addEventListener('resize', ()=> {
       if(!this.menuService.getMenuStatus){
   		  $(".left-menu").css( "margin-left" , -$(".left-menu").width()+ $(".tabs nav").width());
   	  }

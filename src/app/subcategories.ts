@@ -1,4 +1,4 @@
 export class Subcategories { 
-  ID_Categories: string; 
+  uidCategory: string; 
   NameSubcategories: string; 
 }

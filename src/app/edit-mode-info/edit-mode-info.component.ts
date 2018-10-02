@@ -13,7 +13,7 @@ import * as $ from 'jquery';
 export class EditModeInfoComponent implements OnInit {
 
   constructor(public editModeInfoService: EditModeInfoService,
-  			      private mapService: MapService,
+  			      public mapService: MapService,
   			      private menuService: MenuService) { }
 
   ngOnInit() {

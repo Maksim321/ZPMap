@@ -1,6 +1,6 @@
 export class Marker { 
-  uidCategories: string;
-  uidSubcategories: string;
+  uidCategory: string;
+  uidSubcategory: string;
   NameCreator: string;
   Title: string;
   Description: string;

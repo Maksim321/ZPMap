@@ -77,7 +77,7 @@ export class MapService {
   	return marker;
   }
   
-  setInfoWindowMap(marker, contentString){
+  private setInfoWindowMap(marker, contentString){
   	google.maps.event.addListener(marker, 'click', ((marker)=>{
         return ()=>{
           let infowindow = new google.maps.InfoWindow({content: contentString});
@@ -86,15 +86,7 @@ export class MapService {
     })(marker));
   }
  
- 
-  clearMarkers() {
-    for (let i = 0; i < this.markers.length; i++) {
-      this.markers[i].setMap(null);
-    }
-  }
-	  
   deleteMarkers() {
-    //this.clearMarkers();
     for (let i = 0; i < this.markers.length; i++) {
       this.markers[i].setMap(null);
     }
@@ -106,39 +98,59 @@ export class MapService {
     this.getMap.setZoom(17);
   }
   
-  placeArrayMarkers(arrayMarkets:Marker[], categories:Categories[],subcategories:Subcategories[]) {
+  private getCategoryName(categories, uidCategory:string){
+    for(let category of categories){
+      if(category.uidCategory === uidCategory)
+        return category.NameCategories;
+    }
+  }
+
+  private getSubcategoryName(subcategories, uidSubcategory:string){
+    for(let subcategory of subcategories){
+      if(subcategory.uidSubcategory === uidSubcategory){
+        return subcategory.NameSubcategories;
+      }      
+    }
+  }
+
+  private placeMarker(marker:Marker, categoriesName:string,subcategoriesName:string, image){
+    this.setInfoWindowMap(
+      this.setMarker({Address:"", Lat:marker.Lat, Lon:marker.Lon}), 
+      this.createHtmlContent(marker,categoriesName,subcategoriesName, image)
+    );    
+  }
+
+  placeArrayMarkers(arrayMarkets:Marker[], categories, subcategories) {
     this.deleteMarkers();
     arrayMarkets.forEach(marker=>{
       if(marker.Image){
         this.apiService.convertImage(marker.Image).subscribe(value=>{
-          this.setInfoWindowMap(this.setMarker({Address:"", Lat:marker.Lat, Lon:marker.Lon}), 
-            this.createHtmlContent(marker,categories,subcategories, value));
+          this.placeMarker(marker, 
+            this.getCategoryName(categories, marker.uidCategory),
+            this.getSubcategoryName(subcategories, marker.uidSubcategory), 
+            value);
         });
-      }  
-      else{
-        this.setInfoWindowMap(this.setMarker({Address:"", Lat:marker.Lat, Lon:marker.Lon}), 
-          this.createHtmlContent(marker,categories,subcategories, "assets/img/no_photo.jpg"));
+      }else{
+        this.placeMarker(marker, 
+          this.getCategoryName(categories, marker.uidCategory),
+          this.getSubcategoryName(subcategories, marker.uidSubcategory), 
+          "assets/img/no_photo.jpg"
+        );
       }
     });
   }
 
-  private createHtmlContent(marker, categories,subcategories, image){
+  private createHtmlContent(marker:Marker, categories:string,subcategories:string, image){
 	let contentString = '<div class="infowindow">'+
 						  '<div class="infowindow-wrapper">'+
 						    '<div class="photos">'+
 						      '<img src="'+image+'">'+
 						    '</div>'+
   						  '<h3>'+marker.Title+'</h3>'+
-  						  '<ul>';
-  						    for(let category of categories){
-  							    if(marker.uidCategory===category.uidCategory)
-  								    contentString+='<li><b>Категория:</b> '+category.NameCategories+'</li>';
-  						    }
-  						    for(let subcategory of subcategories){
-  							    if(marker.uidSubcategory===subcategory.uidSubcategory)
-  								    contentString+='<li><b>Подкатегория:</b> '+subcategory.NameSubcategories+'</li>';
-  						    }
-  							  contentString+='<li><b>Адрес:</b> '+marker.Address+'</li>'+
+  						  '<ul>'+
+                  '<li><b>Категория:</b> '+categories+'</li>'+
+                  '<li><b>Подкатегория:</b> '+subcategories+'</li>'+
+  							  '<li><b>Адрес:</b> '+marker.Address+'</li>'+
   							  '<li><b>Добавил:</b> '+marker.NameCreator+'</li>'+
   							  '<li><b>Описание:</b></br> '+marker.Description+'</li>'+
   						  '</ul>'+
