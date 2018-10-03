@@ -1,8 +1,11 @@
 # ZPmaps
+Курсовая работа на тему "Открытая карта г. Запорожье", с возможностью просмотра и добавления меток на карту всеми пользователями.
+(пример https://mapa.dniprorada.gov.ua/)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
+### Инструменты реализации
+[![](https://angular.io/assets/images/logos/angular/shield-large.svg)](https://angular.io/ "Angular")[![](https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_96dp.png)](https://firebase.google.com/ "Firebase")
 
+## [AngularFire](https://github.com/angular/angularfire2 "AngularFire")
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Сайт
+>https://zpmap-108c4.firebaseapp.com/
