@@ -1,10 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { ApiService } from "./api.service";
 
-import { Marker } from '../marker';
-import { Subcategories } from '../subcategories';
-import { Categories } from '../categories';
-import { Point } from '../point';
+import { Marker, Subcategories, Categories, Point } from '../models';
 
 @Injectable()
 export class MapService {
@@ -12,7 +9,7 @@ export class MapService {
   private map: any;
   private markers: Array<any> = [];
   private geocoder: any;
-  private currentMarker: Point = new Point;
+  private currentMarker: Point = { Address: '', Lat: 0, Lon: 0, };
 
   constructor(private ngZone: NgZone,
               private apiService: ApiService) {
@@ -68,13 +65,13 @@ export class MapService {
     });
   }  
   
-  setMarker(point:Point){  
-    let marker = new google.maps.Marker({
-      position: new google.maps.LatLng(point.Lat, point.Lon),
-      map: this.map
+  setMarker(point:Point){
+    return new Promise<any>((resolve, reject) => {
+      resolve(new google.maps.Marker({ 
+              position: new google.maps.LatLng(point.Lat, point.Lon),
+              map: this.map})
+      );
     });
-  	this.markers.push(marker);
-  	return marker;
   }
   
   private setInfoWindowMap(marker, contentString){
@@ -87,14 +84,14 @@ export class MapService {
   }
  
   deleteMarkers() {
-    for (let i = 0; i < this.markers.length; i++) {
-      this.markers[i].setMap(null);
-    }
+    this.markers.forEach((value, index)=>{
+      this.markers[index].setMap(null);
+    });
     this.markers = [];
   }
   
-  teleportToMarker(marker:Point){
-    this.getMap.panTo(new google.maps.LatLng(marker.Lat, marker.Lon));
+  teleportToMarker(point:Point){
+    this.getMap.panTo(new google.maps.LatLng(point.Lat, point.Lon));
     this.getMap.setZoom(17);
   }
   
@@ -113,35 +110,40 @@ export class MapService {
     }
   }
 
-  private placeMarker(marker:Marker, categoriesName:string,subcategoriesName:string, image){
-    this.setInfoWindowMap(
-      this.setMarker({Address:"", Lat:marker.Lat, Lon:marker.Lon}), 
-      this.createHtmlContent(marker,categoriesName,subcategoriesName, image)
-    );    
+  private checkImage(image){
+    return new Promise<any>((resolve, reject) => {
+      if(image){
+        this.apiService.convertImage(image).subscribe(value=>{
+          resolve(value);
+        });
+      }else{
+        resolve("assets/img/no_photo.jpg");
+      }      
+    });    
   }
 
   placeArrayMarkers(arrayMarkets:Marker[], categories, subcategories) {
-    this.deleteMarkers();
+    let markers = [];
     arrayMarkets.forEach(marker=>{
-      if(marker.Image){
-        this.apiService.convertImage(marker.Image).subscribe(value=>{
-          this.placeMarker(marker, 
-            this.getCategoryName(categories, marker.uidCategory),
-            this.getSubcategoryName(subcategories, marker.uidSubcategory), 
-            value);
-        });
-      }else{
-        this.placeMarker(marker, 
-          this.getCategoryName(categories, marker.uidCategory),
-          this.getSubcategoryName(subcategories, marker.uidSubcategory), 
-          "assets/img/no_photo.jpg"
-        );
-      }
+      this.setMarker(marker.Point).then((point)=>{
+        markers.push(point);
+        this.checkImage(marker.Image).then((image)=>{
+          this.setInfoWindowMap(point, 
+            this.createHtmlContent(marker,
+              this.getCategoryName(categories, marker.uidCategory),
+              this.getSubcategoryName(subcategories, marker.uidSubcategory), 
+              image
+            )
+          );
+        });        
+      });
     });
+    this.deleteMarkers();
+    this.markers = markers;
   }
 
   private createHtmlContent(marker:Marker, categories:string,subcategories:string, image){
-	let contentString = '<div class="infowindow">'+
+	  return  '<div class="infowindow">'+
 						  '<div class="infowindow-wrapper">'+
 						    '<div class="photos">'+
 						      '<img src="'+image+'">'+
@@ -150,13 +152,11 @@ export class MapService {
   						  '<ul>'+
                   '<li><b>Категория:</b> '+categories+'</li>'+
                   '<li><b>Подкатегория:</b> '+subcategories+'</li>'+
-  							  '<li><b>Адрес:</b> '+marker.Address+'</li>'+
+  							  '<li><b>Адрес:</b> '+marker.Point.Address+'</li>'+
   							  '<li><b>Добавил:</b> '+marker.NameCreator+'</li>'+
   							  '<li><b>Описание:</b></br> '+marker.Description+'</li>'+
   						  '</ul>'+
 						  '</div>'+
 						'</div>';
-	return contentString;
-  }
-  
+  } 
 }

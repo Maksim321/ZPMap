@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output} from '@angular/core';
-import { ModalDialogService } from '../services/modal-dialog.service';
+import { ModalDialogService } from "../core";
 import * as $ from 'jquery';
 
 @Component({
@@ -13,7 +13,7 @@ export class ModalDialogComponent implements OnInit {
 
   ngOnInit() {
     $('#overlay').fadeIn(300,()=>{ 
-        $('.modal_form') .animate({opacity: 1, top: '50%'}, 300);
+      $('.modal_form') .animate({opacity: 1, top: '50%'}, 300);
     });	
   }
 }

@@ -6,9 +6,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import * as firebase from 'firebase/app';
 import { map } from 'rxjs/operators';
 
-import { Marker } from '../marker';
-import { Subcategories } from '../subcategories';
-import { Categories } from '../categories';
+import { Marker, Subcategories, Categories } from '../models';
 
 @Injectable()
 export class ApiService {

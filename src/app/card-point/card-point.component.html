@@ -1,9 +1,5 @@
 
-<div class="card" (click)="mapService.teleportToMarker({
-    		    			'Address': marker.Address,
-    			  			'Lat': marker.Lat,
-    			  			'Lon': marker.Lon
-    		  			})">
+<div class="card" (click)="mapService.teleportToMarker(marker.Point)">
   <div class="container">
 	<div class="containerLeft">
 	  <div class="containerLeftBody">
@@ -17,7 +13,7 @@
 		</div>
 	  </div>
 	  <div class="containerLeftBody">
-		<h5>{{marker.Address}}</h5>
+		<h5>{{marker.Point.Address}}</h5>
 	  </div>
 	  <div class="containerLeftFooter">
 		<p>Добавлено: {{date}} {{time}}</p>

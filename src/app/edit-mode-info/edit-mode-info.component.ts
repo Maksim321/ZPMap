@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EditModeInfoService } from '../services/edit-mode-info.service';
-import { MapService } from '../services/map.service';
-import { MenuService } from '../services/menu.service';
+import { EditModeInfoService, MapService, MenuService } from "../core";
 
 import * as $ from 'jquery';
 

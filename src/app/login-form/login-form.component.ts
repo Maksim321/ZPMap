@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { NgForm } from '@angular/forms';
-import { MessageService } from '../services/message.service';
-import { ModalDialogService } from '../services/modal-dialog.service';
+import { AuthService, MessageService, ModalDialogService } from "../core";
+
 import * as $ from 'jquery';
 
 @Component({

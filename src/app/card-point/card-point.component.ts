@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MapService } from '../services/map.service';
-import { ApiService } from "../services/api.service";
-import { Marker } from '../marker';
+import { ApiService, MapService, Marker } from "../core";
+
 import { Observable } from 'rxjs';
 import * as $ from 'jquery';
 
@@ -12,7 +11,7 @@ import * as $ from 'jquery';
 })
 
 export class CardPointComponent implements OnInit {
-  @Input() marker:any;
+  @Input() marker:Marker;
   time:string;
   date:string;
   urlImage: Observable<string | null>;

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from './services/message.service';
-import { EditModeInfoService } from './services/edit-mode-info.service';
-import { ModalDialogService } from './services/modal-dialog.service';
-import { AuthService } from './services/auth.service';
-import { MapService } from './services/map.service';
+import { AuthService, EditModeInfoService, MapService, 
+  MessageService, ModalDialogService} from './core';
+
 import * as $ from 'jquery';
 
 

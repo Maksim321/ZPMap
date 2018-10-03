@@ -1,25 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { NgForm } from '@angular/forms';
-import { ApiService } from "../services/api.service";
-import { MessageService } from '../services/message.service';
-import { MapService } from '../services/map.service';
-import { ModalDialogService } from '../services/modal-dialog.service';
-import { SubscribingToDataService } from "../services/subscribing-to-data.service";
+import { ApiService, AuthService, MapService, MessageService, ModalDialogService, 
+  SubscribingToDataService, Categories, Subcategories } from "../core";
 
-import { Subcategories } from '../subcategories';
-import { Categories } from '../categories';
 
 @Component({
   selector: 'add-marker-form',
   templateUrl: './add-marker-form.component.html',
   styleUrls: ['./add-marker-form.component.css']
 })
-export class AddMarkerFormComponent implements OnInit {
-
-  lon:number;
-  lat:number;
-  address:string;  
+export class AddMarkerFormComponent implements OnInit { 
   file: any;
   selectedCategories: Categories[];
   selectedSubcategories: Subcategories[];
@@ -76,9 +66,9 @@ export class AddMarkerFormComponent implements OnInit {
 
   loadPointForm(dataForm: NgForm){
     dataForm.value['NameCreator'] = this.authService.authState.displayName;
-    dataForm.value['Address'] = this.mapService.getcurrentMarker.Address;
-    dataForm.value['Lat'] = this.mapService.getcurrentMarker.Lat;
-    dataForm.value['Lon'] = this.mapService.getcurrentMarker.Lon;
+    dataForm.value['Point'] = { Address: this.mapService.getcurrentMarker.Address, 
+                                Lat: this.mapService.getcurrentMarker.Lat, 
+                                Lon: this.mapService.getcurrentMarker.Lon, };
     dataForm.value['Date'] = new Date();
     this.apiService.addMarker(dataForm.value).then(res => {
       this.messageService.successMessages("Ура!:","Метка успешно добавлена!");

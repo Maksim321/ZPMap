@@ -11,12 +11,7 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { MapLayerComponent } from './map-layer/map-layer.component';
-import { ApiService } from './services/api.service';
-import { MapService } from './services/map.service';
-import { EditModeInfoService } from './services/edit-mode-info.service';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
-import { ModalDialogService } from './services/modal-dialog.service';
-import { MessageService } from './services/message.service';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { CardPointComponent } from './card-point/card-point.component';
 import { HeaderComponent } from './header/header.component';
@@ -25,6 +20,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { AddMarkerFormComponent } from './add-marker-form/add-marker-form.component';
 import { AlertComponent } from './alert/alert.component';
 import { EditModeInfoComponent } from './edit-mode-info/edit-mode-info.component';
+
+import { CoreModule } from './core/core.module';
 
 
 
@@ -43,14 +40,15 @@ import { EditModeInfoComponent } from './edit-mode-info/edit-mode-info.component
     EditModeInfoComponent
   ],
   imports: [
-  BrowserModule,
-	FormsModule,
-	AngularFireModule.initializeApp(environment.firebase),
-	AngularFireStorageModule,
-  AngularFirestoreModule,
-	AngularFireAuthModule
+    BrowserModule,
+  	FormsModule,
+  	AngularFireModule.initializeApp(environment.firebase),
+  	AngularFireStorageModule,
+    AngularFirestoreModule,
+  	AngularFireAuthModule,
+    CoreModule
   ],
-  providers: [ApiService, MapService, ModalDialogService, MessageService, EditModeInfoService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

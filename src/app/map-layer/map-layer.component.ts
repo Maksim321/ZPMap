@@ -1,6 +1,6 @@
 import { Component, Inject, ElementRef, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { MapService } from '../services/map.service';
+import { MapService } from "../core";
 
 @Component({
   selector: 'app-map-layer',

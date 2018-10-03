@@ -3,13 +3,9 @@ import { MapService } from './map.service';
 import { SubscribingToDataService } from "./subscribing-to-data.service";
 import * as $ from 'jquery';
 
-import { Marker } from '../marker';
-import { Subcategories } from '../subcategories';
-import { Categories } from '../categories';
+import { Subcategories, Categories } from '../models';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MenuService {
 
   private menuStatus:boolean = false;
@@ -60,7 +56,6 @@ export class MenuService {
   private selectMarkers(property, value){
     if(property&&value){
       this.subscribingToDataService.selectMarkers(property, value).then(markers=>{
-        this.clearMarkers();
         this.mapService.placeArrayMarkers(markers, 
           this.subscribingToDataService.getSelectedCategories, 
           this.subscribingToDataService.getSelectedSubcategories
@@ -95,8 +90,4 @@ export class MenuService {
         ()=>resolve(true));
     });     
   }
-
-  clearMarkers(){
-    this.mapService.deleteMarkers();
-  } 
 }

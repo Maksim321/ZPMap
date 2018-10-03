@@ -4,9 +4,7 @@ import { ModalDialogService } from './modal-dialog.service';
 import { AuthService } from './auth.service';
 import * as $ from 'jquery';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EditModeInfoService {
 
   private isEditMode:boolean = false;

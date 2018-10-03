@@ -1,4 +1,4 @@
-export class Subcategories { 
+export interface Subcategories { 
   uidCategory: string; 
   NameSubcategories: string; 
 }

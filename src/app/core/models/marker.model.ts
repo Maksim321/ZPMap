@@ -1,12 +1,12 @@
-export class Marker { 
+import { Point } from './point.model';
+
+export interface Marker { 
   uidCategory: string;
   uidSubcategory: string;
   NameCreator: string;
   Title: string;
   Description: string;
-  Address: string;
-  Lat:number;
-  Lon:number
+  Point: Point;
   Image:string;
   Date:any;
 }

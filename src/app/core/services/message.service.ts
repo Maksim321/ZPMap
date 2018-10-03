@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Message } from '../message';
+import { Message } from '../models';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class MessageService {
 
   messages:Message[] = [];

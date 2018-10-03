@@ -1,6 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { SubscribingToDataService } from "../services/subscribing-to-data.service";
-import { MenuService } from '../services/menu.service';
+import { SubscribingToDataService, MenuService } from "../core";
+
 import * as $ from 'jquery';
 
 @Component({

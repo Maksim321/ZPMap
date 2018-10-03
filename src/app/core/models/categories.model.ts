@@ -1,4 +1,4 @@
-export class Categories { 
+export interface Categories { 
   NameCategories: string; 
   UrlImageCategories: string; 
 }

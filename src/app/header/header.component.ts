@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { ModalDialogService } from '../services/modal-dialog.service';
+import { AuthService, ModalDialogService } from "../core";
 import * as $ from 'jquery';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

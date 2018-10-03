@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { ApiService } from "../services/api.service";
+import { Marker, Subcategories, Categories } from '../models';
 
-import { Marker } from '../marker';
-import { Subcategories } from '../subcategories';
-import { Categories } from '../categories';
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SubscribingToDataService {
   private selectedMarkers:Marker[] = [];
   private selectedCategories: Categories[];
