@@ -31,7 +31,7 @@ export class AuthService {
   	  provider.addScope('email');
   	  this.afAuth.auth.signInWithPopup(provider).then(res => {
   	    resolve(res);
-  	  })
+  	  }, err => reject(err))
 	  })
   }
 

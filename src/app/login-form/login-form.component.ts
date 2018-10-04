@@ -23,11 +23,22 @@ export class LoginFormComponent implements OnInit {
     this.isRegister = !this.isRegister;
   }
 
+  private loginFailed(err){
+    this.messageService.errorMessages("Error: ", err.message);
+    this.modalDialogService.setSpinnerStatus = false;    
+  }
+
+  private loginSuccess(){
+    this.messageService.successMessages("Ура!", "Успешно авторизировались!"); 
+    this.modalDialogService.closeModalForm();    
+  }  
+
   tryGoogleLogin(){
     this.modalDialogService.setSpinnerStatus = true;
     this.authService.doGoogleLogin().then(res => {
-      this.messageService.successMessages("Ура!", "Успешно авторизировались!"); 
-      this.modalDialogService.closeModalForm(); 
+      this.loginSuccess();
+    }, err => {
+      this.loginFailed(err);
     });
   }
 
@@ -35,11 +46,9 @@ export class LoginFormComponent implements OnInit {
     this.modalDialogService.setSpinnerStatus = true;
     if(!this.isRegister){
         this.authService.doLogin(value).then(res => {
-        this.messageService.successMessages("Ура!", "Успешно авторизировались!");  
-        this.modalDialogService.closeModalForm(); 
+        this.loginSuccess(); 
       }, err => {
-        this.modalDialogService.setSpinnerStatus = false;
-        this.messageService.errorMessages("Error", err.message);
+        this.loginFailed(err);
       });
     }
     else{

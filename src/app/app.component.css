@@ -46,6 +46,7 @@ header{
   border-bottom-left-radius: 5px;
   box-shadow: 0px 6px 6px -4px #333;
   transform: translateX(160px);
+  background: #9e0059;
 }
 
 .add-marker-button:hover{
@@ -57,7 +58,6 @@ header{
     display: inline-block;
     -webkit-transform: rotate(-90deg);
     transform: rotate(-90deg);
-    background: #9e0059;
     height: 60px;
     width: 60px;
     float: left;
