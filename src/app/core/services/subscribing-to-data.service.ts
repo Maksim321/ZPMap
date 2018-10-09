@@ -44,4 +44,8 @@ export class SubscribingToDataService {
   	  });
     }); 
   } 
+
+  deleteMarkers(){
+    this.selectedMarkers = [];
+  }
 }

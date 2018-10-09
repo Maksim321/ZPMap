@@ -64,8 +64,9 @@ export class MenuService {
     }
   }
 
-  closeMenu(){
-    this.setMenuStatus = false;
+  clearMarkers(){
+    this.mapService.deleteMarkers();
+    this.subscribingToDataService.deleteMarkers();
   }
 
   openMenu(uidCategory){

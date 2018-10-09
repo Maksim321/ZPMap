@@ -25,7 +25,7 @@ export class LeftMenuComponent implements OnInit {
   openOrCloseMenu(uidCategory){
   	if(this.menuService.getMenuStatus && this.menuService.getSelectedCategoriesUID === uidCategory){
   	  $(".left-menu").animate({marginLeft:0 - $(".left-menu").width() + $(".tabs nav").width()},300);
-  	  this.menuService.closeMenu();
+  	  this.menuService.setMenuStatus = false;
   	}
   	else{
   	  $(".left-menu").animate({marginLeft:0},300);
