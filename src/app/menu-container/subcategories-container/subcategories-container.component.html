@@ -1,0 +1,17 @@
+<div class="contentHead">
+  <div class="subcategoriesList">
+    <ng-container *ngFor="let subcategory of observables.getSubcategories$ | async">
+      <div class="subcategoriesList_radio">
+        <input type="radio" (change)="menuService.setSelectedSubcategoriesUID = subcategory.uidSubcategory"
+            [value]='subcategory.uidSubcategory' 
+            name="subcategoriesRadio">
+        <label for="subcategoriesLabel">{{subcategory.NameSubcategories}}</label>
+      </div>
+    </ng-container>
+  </div>
+  <div class='subcategoriesButton'>
+    <button (click)="menuService.getMarkersBySubcategory()">Обновить</button>
+    <button (click)="menuService.clearMarkers()">Очистить</button>  
+  </div>
+</div>
+

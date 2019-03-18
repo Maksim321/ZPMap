@@ -1,0 +1,13 @@
+<div class="menu-container">
+  <div class="content">
+    <div class="contentHead">
+      <app-subcategories-container></app-subcategories-container>
+    </div>
+    <div class="contentBody">
+      <app-card-container *ngFor="let marker of observables.getMarkers$ | async" 
+                          [marker]="marker"></app-card-container>
+    </div>
+  </div>
+  <app-categories-container></app-categories-container>
+</div>
+

@@ -11,7 +11,6 @@ header{
 }
 
 .map{
-  float:left;
   height:100%;
   z-index:0;
   overflow: hidden;
@@ -20,7 +19,6 @@ header{
 
 .left-menu{
   height:100%;
-  float:left;
   position: relative;
   background: #f5f5f5;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);

@@ -1,8 +1,8 @@
-form{
+.marker-form{
   font-family: sans-serif;
 }
 
-.content-page-body-row {
+.marker-form__row {
   overflow: auto;
 }
 
@@ -25,21 +25,21 @@ input:focus {
 	margin:0 15%;
 }
 
-textarea{
+.marker-form__textarea{
 	width:100%;
   resize: none;
   height: 50px;
   box-sizing: border-box;
 }
 
-label{
+.marker-form__label{
   display: inline-block;
   height: 100%;
   margin: 1px;
   color: #9e0059;
 }
 
-button{
+.marker-form__submit{
   border: 1px solid #9e0059;
   font-weight: 700;
   font-size: 14px;
@@ -54,13 +54,13 @@ button{
   -webkit-transition: 0.3s;
 }
 
-button:hover{
+.marker-form__submit:hover{
   background-color: #9e0059;
   color: #fff;
 }
 
 @media screen and (min-width:100px) {
-  form{
+  .marker-form{
     width: 100%;
   }
 
@@ -69,31 +69,31 @@ button:hover{
     padding: 5px
   }
 
-  .content-page-body-row {
+  .marker-form__row {
     margin:5px 0;
   }
 
-  label{
+  .marker-form__label{
     padding: 5px;
   }
 }
 
 @media screen and (min-width:480px) {
-  form{
+  .marker-form{
     width: 480px;
   }
 
-  .content-page-body-row{
+  .marker-form__row{
     margin: 10px 0;
   }
 
-  label{
+  .marker-form__label{
     padding: 8px;
   }
 }
 
 @media screen and (min-width:768px) {
-  form{
+  .marker-form{
     width: 640px;
   }
 
@@ -102,7 +102,7 @@ button:hover{
     padding: 10px;
   }
 
-  .content-page-body-row {
+  .marker-form__row {
     margin:15px 0;
   }
 }

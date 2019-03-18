@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService, EditModeInfoService, MapService, 
-  MessageService, ModalDialogService} from './core';
+  MessageService, ModalDialogService, ObservablesService, ApiService} from './core';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import * as $ from 'jquery';
 
@@ -11,14 +13,29 @@ import * as $ from 'jquery';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
- 
+
+  defaultCategory:Subscription;
   constructor(public messageService: MessageService,
   			      public modalDialogService: ModalDialogService,
               public editModeInfoService: EditModeInfoService,
               public authService: AuthService,
-              private mapService: MapService,){}
+              public observables: ObservablesService,
+              private mapService: MapService){
+
+    this.authService.getAuthState$.subscribe((auth) => {
+      if(auth)
+        this.authService.setAuthState = auth;
+    });
+    
+    this.observables.loadingCategories();
+  }
   
-  ngOnInit() {}
+  ngOnInit() {
+    this.defaultCategory = this.observables.getCategories$.subscribe(categories=>{
+      this.observables.loadingSubcategories(categories[0].uidCategory);
+      this.observables.loadingMarkers("uidCategory", categories[0].uidCategory);
+    });
+  }
   
   clickOnMap(){
   	if(this.editModeInfoService.getEditModeState){

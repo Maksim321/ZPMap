@@ -1,13 +1,14 @@
-.left-block, a{
+*{
   box-sizing: border-box;
 }
 
-.logo_text, .logo_img{
+.logo-container__block-text, 
+.logo-container__block-link{
   float: left;
   height: 100%;
 }
 
-ul {
+.link-container {
   float: right;
   padding: 0;
   list-style: none;
@@ -15,7 +16,7 @@ ul {
   
 }
 
-li {
+.link-container__list {
   float:left;
   height:100%;
   margin:0;
@@ -32,7 +33,7 @@ a{
   -webkit-transition: 0.2s;
 }
 
-li a:hover{
+.link-container__list a:hover{
   background-color: #9e0059;
   color: #fff;
   cursor: pointer;
@@ -43,21 +44,22 @@ strong {
   color: #9e0059;
 }
 
-.logo_link, .git-link{
+.logo-container__link, 
+.link-container__git-link{
   background-size: contain;
   background-origin: content-box;
   background-repeat: no-repeat;
 }
 
-.logo_link{
+.logo-container__link{
   background-image: url("/assets/img/zp_logo.svg");
 }
 
-li .git-link{
+.link-container__list .git-link{
   background-image: url("/assets/img/git_icon-black.png");
 }
 
-li .git-link:hover{
+.link-container__list .git-link:hover{
   background-image: url("/assets/img/git_icon-white.png");
 }
 
@@ -65,23 +67,24 @@ li .git-link:hover{
 
   .header_container{
     height: 90px;
-    padding: 0 5px;
+    margin: 0 5px;
   }
 
-  li {
+ .link-container__list {
     font-size: 12px;
   }
 
-  li a{
+ .link-container__list a{
     padding: 15px 7px;
   }
 
-  li .git-link{
+ .link-container__list 
+ .link-container__git-link{
     padding: 5px 2px;
     width: 40px;
   }
 
-  .logo_link{
+  .logo-container__link{
     width: 35px;
   }
 
@@ -89,16 +92,17 @@ li .git-link:hover{
     font-size: 20px;
   }
 
-  .left-block, ul{
+  .logo-container, ul{
     height: 50%;
   } 
 
-  .left-block{
+  .logo-container{
     float: none;
     padding: 2px 0;
   }
 
-  .logo_img, .logo_text{
+  .logo-container__block-link,
+  .logo-container__block-text{
     margin: 0 9px;
   }
 }
@@ -106,36 +110,38 @@ li .git-link:hover{
 @media screen and (min-width:480px) {
   .header_container{
     height: 70px;
-    padding: 0 5px;
+    margin: 0 5px;
   }
 
-  li {
+ .link-container__list {
     font-size: 14px;
   }  
 
-  li a{
+ .link-container__list a{
     padding: 27px 10px;
   }
 
-  li .git-link{
+ .link-container__list 
+ .link-container__git-link{
     padding: 15px 10px;
     width: 60px;
   }
 
-  .logo_link{
+  .logo-container__link{
     width: 40px;
   }
 
-  .left-block, ul{
+  .logo-container, ul{
     height: 100%;
   }
 
-  .left-block{
+  .logo-container{
     float: left;
     padding: 12px 0;
   }
 
-  .logo_img, .logo_text{
+  .logo-container__block-link, 
+  .logo-container__block-text{
     margin: 0 10px
   }
 
@@ -147,10 +153,10 @@ li .git-link:hover{
 @media screen and (min-width:768px) {
 
   .header_container{
-    padding: 0 30px;
+    margin: 0 30px;
   }
 
-  li {
+ .link-container__list {
     font-size: 16px;
   }
 
@@ -158,20 +164,21 @@ li .git-link:hover{
     font-size: 30px;
   }
 
-  li .git-link{
+  .link-container__list .git-link{
     padding:8px;
     width: 70px;
   }
 
-  .logo_link{
+  .logo-container__link{
     width: 45px;
   }
 
-  .left-block{
+  .logo-container{
     padding: 8px 0;
   }
 
-  .logo_img, .logo_text{
+  .logo-container__block-link, 
+  .logo-container__block-text{
     margin: 0 10px
   }
 }

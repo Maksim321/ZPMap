@@ -5,4 +5,4 @@ export * from './message.service';
 export * from './map.service';
 export * from './menu.service';
 export * from './modal-dialog.service';
-export * from './subscribing-to-data.service';
+export * from './observables.service';

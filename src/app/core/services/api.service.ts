@@ -10,33 +10,26 @@ import { Marker, Subcategories, Categories } from '../models';
 
 @Injectable()
 export class ApiService {
-
-  private categoriesObservable:Observable<Categories[]>;
-
   constructor(private afStore: AngularFirestore,
-              private afStorage: AngularFireStorage) {
-    this.categoriesObservable = this.getCategoriesObservableP();
-  }
+              private afStorage: AngularFireStorage) {}
 
-  get getCategoriesObservable():Observable<Categories[]> {
-    return this.categoriesObservable;
-  }
-
-  private getCategoriesObservableP():Observable<Categories[]>{
+  getCategories$():Observable<Categories[]>{
     return this.afStore.collection<Categories>('/Categories').snapshotChanges().pipe(map(changes => {
-        return changes.map(c => ({ uidCategory: c.payload.doc.id, ...c.payload.doc.data() 
+        return changes.map(c => ({ NameCategories: c.payload.doc.data().NameCategories,
+                                   UrlImageCategories: c.payload.doc.data().UrlImageCategories,
+                                   uidCategory: c.payload.doc.id
       }));
     }));
   }
 
-  getSubcategoriesObservable(uidCategories):Observable<Subcategories[]>{
-    return this.afStore.collection<Subcategories>('Categories/'+uidCategories+'/Subcategories').snapshotChanges().pipe(map(changes => {
+  getSubcategories$(uidCategories:string):Observable<Subcategories[]>{
+    return this.afStore.collection<Subcategories>(`Categories/${uidCategories}/Subcategories`).snapshotChanges().pipe(map(changes => {
         return changes.map(c => ({ uidSubcategory: c.payload.doc.id, ...c.payload.doc.data() 
       }));
     }));
   }
 
-  getMarkersObservable(property, value):Observable<Marker[]>{
+  getMarkers$(property, value):Observable<Marker[]>{
     return this.afStore.collection<Marker>('/Points', ref => 
       ref.where(property, '==', value)).valueChanges();
   }  

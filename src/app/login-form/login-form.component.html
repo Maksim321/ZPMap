@@ -1,25 +1,25 @@
-<form #userLoginForm="ngForm" (ngSubmit)="tryLogin(userLoginForm.value)">
-  <div *ngIf="isRegister" class="content-page-body-row">
+<form class="login-form" #userLoginForm="ngForm" (ngSubmit)="tryLogin(userLoginForm.value)">
+  <div *ngIf="isRegister" class="login-form__row">
     <label class="login-lbl">Имя</label>
-    <input class="login-inpt" type="text" name="displayName" placeholder="nickname" ngModel>
+    <input class="login-inpt" type="text" name="displayName" placeholder="nickname" [(ngModel)]="userForm.displayName" required>
   </div>        
-  <div class="content-page-body-row">
+  <div class="login-form__row">
     <label class="login-lbl">Email</label>
-    <input class="login-inpt" type="email" name="email" placeholder="email@example.com" ngModel>
+    <input class="login-inpt" type="email" name="email" placeholder="email@example.com" [(ngModel)]="userForm.email" required>
   </div>
-  <div class="content-page-body-row">
+  <div class="login-form__row">
     <label class="login-lbl">Пароль</label>
-    <input class="password-inpt" type="password" name="password" placeholder="123456" minlength="3" ngModel>
+    <input class="password-inpt" type="password" name="password" placeholder="123456" minlength="3" [(ngModel)]="userForm.password" required>
   </div>
-  <div class="content-page-body-row">
+  <div class="login-form__row">
     <a (click)="tryGoogleLogin()" class="google_login-link link">
       <img class="google_login_link-img" src="/assets/img/google_login_icon.png" alt="google_login_icon"/>
       <div class="google_login_link-text">Войти с помощью Google</div>
     </a>         
-    <button *ngIf="!isRegister" class="submit-btn" type="submit">Войти</button>
-    <button *ngIf="isRegister" class="submit-btn"  type="submit">Регистрация</button>
+    <button *ngIf="!isRegister" [disabled]="!userLoginForm.form.valid" class="login-form_submit" type="submit">Войти</button>
+    <button *ngIf="isRegister" [disabled]="!userLoginForm.form.valid" class="login-form_submit"  type="submit">Регистрация</button>
   </div>
-  <div class="content-page-body-row">
+  <div class="login-form__row">
     <div>или</div>
     <a *ngIf="!isRegister" class="register_switch-link link" (click)="selectRegister()">зарегистрироваться</a>
     <a *ngIf="isRegister" class="register_switch-link link" (click)="selectRegister()">войти</a>

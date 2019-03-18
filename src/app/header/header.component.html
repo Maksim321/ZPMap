@@ -1,36 +1,30 @@
 <div class="header_container">
-  <div class="left-block">
-    <div class="logo_img">
-      <a href="/" class="logo_link"></a>
+  <div class="logo-container">
+    <div class="logo-container__block-link">
+      <a href="/" class="logo-container__link"></a>
     </div>
-    <div class="logo_text">
+    <div class="logo-container__block-text">
       <strong>Запоріжжя</strong><br>
       <span>Відкрита мапа</span>
     </div>
   </div>
-  <ul>
-    <ng-container *ngIf="authService.loggedIn !== null">
-      <ng-container *ngIf="authService.loggedIn; then first else second"></ng-container>
-      <ng-template #first>
-        <li>
-          <a class="header-login-link">
-            {{authService.authState.displayName}}
-          </a>
-        </li>
-        <li>
-          <a class="header-login-link" (click)="LogOut()">
-            Выход
-          </a>
-        </li>
-      </ng-template>
-      <ng-template #second>
-        <li (click)="LogIn()">
-          <a>Войти</a>
-        </li>
-      </ng-template>
-    </ng-container>
+  <ul class="link-container">
+    <ng-container *ngIf="authService.authenticated; then first else second"></ng-container>
+    <ng-template #first>
+      <li class="link-container__list">
+        <a class="header-login-link">{{authService.authState.displayName}}</a>
+      </li>
+      <li class="link-container__list">
+        <a class="header-login-link" (click)="LogOut()">Выход</a>
+      </li>
+    </ng-template>
+    <ng-template #second>
+      <li class="link-container__list" (click)="LogIn()">
+        <a>Войти</a>
+      </li>
+    </ng-template>
     <li>
-      <a href="https://github.com/Maksim321/ZPMap" class="git-link"></a>
+      <a href="https://github.com/Maksim321/ZPMap" class="link-container__git-link"></a>
     </li>
   </ul>
 </div>

@@ -1,4 +1,4 @@
-form{
+.login-form{
   font-family: sans-serif;
 }
 
@@ -12,11 +12,11 @@ input{
 	box-sizing:border-box
 }
 
-button, input:focus, .google_login-link {
+.login-form_submit, input:focus, .google_login-link {
   border: 1px solid #9e0059;
 }
 
-button{
+.login-form_submit{
   padding: 10px 12px;
 	overflow: hidden;
 	vertical-align: middle;
@@ -24,7 +24,7 @@ button{
   background-color: #bd347a;
 }
 
-button:hover{
+.login-form_submit:hover{
 	background-color: #9e0059;
 	color: #fff;
 }
@@ -36,24 +36,26 @@ button:hover{
 	color: #9e0059;
 }
 
-.link, button, input{
+.link, .login-form_submit, input{
 	transition:0.3s;
 	-webkit-transition: 0.3s;
 }
 
-button, .link{
+.login-form_submit, .link{
 	cursor: pointer;
 }
 
 
-.google_login-link, button{
+.google_login-link, .login-form_submit{
 	font-weight: 700;
 	font-size:14px;
 	border-radius: 2px;
   box-sizing: border-box;
 }
 
-.google_login-link, button, .login-lbl{
+.google_login-link, 
+.login-form_submit, 
+.login-lbl{
   box-sizing: border-box;
 }
 
@@ -87,17 +89,18 @@ button, .link{
 	border-bottom: 1px solid #000;
 }
 
-.content-page-body-row:last-child{
+.login-form__row:last-child{
 	text-align: center;
 }
 
 
 @media screen and (min-width:100px) {
-  form{
+  .login-form{
 	  width: 100%;
   }
 
-  .google_login-link, button{
+  .google_login-link, 
+  .login-form_submit{
 	  width: 100%;
   }
 
@@ -106,7 +109,7 @@ button, .link{
 	  margin-bottom: 10px;
   }
 
-  .content-page-body-row{
+  .login-form__row{
     margin: 7px 0;
   }
 
@@ -116,11 +119,11 @@ button, .link{
 }
 
 @media screen and (min-width:480px) {
-  form{
+  .login-form{
 	  width: 425px;
   }
 
-  .content-page-body-row{
+  .login-form__row{
     margin: 10px 0;
   }
 
@@ -131,11 +134,11 @@ button, .link{
 
 @media screen and (min-width:768px) {
 
-  .content-page-body-row{
+  .login-form__row{
     margin: 15px 0;
   }
 
-  button{
+  .login-form_submit{
 	  width: 370px;
 	  margin-left: 15px;
   }
@@ -152,23 +155,7 @@ button, .link{
 	  background-color: #9e0059;
   }
 
-  .google_login-link:hover ~ button{
+  .google_login-link:hover ~ .login-form_submit{
 	  width: 125px;
   }
-}
-
-@media screen and (min-width:1000px) {
-
-}
-
-@media screen and (min-width:1366px) {
-
-}
-
-@media screen and (min-width:1600px) {
-
-}
-
-@media screen and (min-width:1900px) {
-
 }

@@ -9,7 +9,7 @@ import {
   MenuService,
   MessageService,
   ModalDialogService,
-  SubscribingToDataService
+  ObservablesService
 } from './services';
 
 
@@ -25,7 +25,7 @@ import {
     MenuService,
     MessageService,
     ModalDialogService,
-    SubscribingToDataService
+    ObservablesService
   ],
   declarations: []
 })

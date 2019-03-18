@@ -1,0 +1,36 @@
+.menu-container {
+  width: 100%;
+  font: 13px sans-serif;
+  font-weight: 600;
+}
+
+.menu-container .content {
+  float:left;
+  position:absolute;
+  color: #6C5D5D;
+  height: 100%;
+  overflow: auto;
+  transition: opacity 0.1s linear 0s;
+  box-shadow: 5px 0 5px -5px #333;
+}
+
+.menu-container .content.visible {
+  opacity: 1;
+  z-index: 3;
+}
+
+
+@media screen and (min-width:100px) {  
+  .menu-container .content {
+    width:calc(100% - 50px);
+  }
+}
+
+@media screen and (min-width:480px) {
+}
+
+@media screen and (min-width:768px) {
+  .menu-container .content {
+    width:calc(100% - 65px);
+  }
+}

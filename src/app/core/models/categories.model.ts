@@ -1,4 +1,5 @@
 export interface Categories { 
   NameCategories: string; 
-  UrlImageCategories: string; 
+  UrlImageCategories: string;
+  uidCategory: string; 
 }

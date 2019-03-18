@@ -1,0 +1,24 @@
+
+<div class="card" (click)="mapService.teleportToMarker(marker.Point)">
+  <div class="container">
+	<div class="containerLeft">
+	  <div class="containerLeftBody">
+		<div class="containerLeftBodyIcon">
+		  <div *ngIf="urlImage | async as url">
+		    <img [src]="url" onerror="this.src='assets/img/no_image-200x200.png'" alt="Avatar"/>
+		  </div>
+		</div>
+		<div class="containerLeftBodyText">
+		  <h4>{{marker.Title}}</h4> 
+		</div>
+	  </div>
+	  <div class="containerLeftBody">
+		<h5>{{marker.Point.Address}}</h5>
+	  </div>
+	  <div class="containerLeftFooter">
+		<p>Добавлено: {{date}} {{time}}</p>
+	  </div>
+	</div>
+  </div>
+</div>
+

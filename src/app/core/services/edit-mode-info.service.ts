@@ -18,7 +18,7 @@ export class EditModeInfoService {
   }
 
   openEditMode(){
-    if(this.authService.loggedIn){
+    if(this.authService.authenticated){
       this.isEditMode = true;
     }
     else{

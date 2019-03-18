@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MapService } from './map.service';
-import { SubscribingToDataService } from "./subscribing-to-data.service";
 import * as $ from 'jquery';
+
+import { ObservablesService } from "./observables.service";
 
 import { Subcategories, Categories } from '../models';
 
@@ -13,7 +14,7 @@ export class MenuService {
   private selectedSubcategoriesUID:string;
 
   constructor(private mapService: MapService,
-              private subscribingToDataService: SubscribingToDataService) {}
+              private observables: ObservablesService) {}
 
   get getMenuStatus():boolean {
     return this.menuStatus;
@@ -39,34 +40,28 @@ export class MenuService {
     this.selectedSubcategoriesUID = value;
   }
 
-  getMarkersByCategory(uidCategory){
+  getMarkersByCategory(uidCategory:string){
     this.selectMarkers("uidCategory", uidCategory);  
   }
 
-  getMarkersBySubcategory(){
+  getMarkersBySubcategory(uidCategory:string){
     this.selectMarkers("uidSubcategory", this.getSelectedSubcategoriesUID);   
   }   
 
   private selectSubcategories(uidCategory){
-    this.subscribingToDataService.selectSubcategories(uidCategory).then(()=>{
-      this.getMarkersByCategory(uidCategory);
-    });   
+    this.observables.loadingSubcategories(uidCategory);
+    this.getMarkersByCategory(uidCategory);
   }
 
   private selectMarkers(property, value){
-    if(property&&value){
-      this.subscribingToDataService.selectMarkers(property, value).then(markers=>{
-        this.mapService.placeArrayMarkers(markers, 
-          this.subscribingToDataService.getSelectedCategories, 
-          this.subscribingToDataService.getSelectedSubcategories
-        );
-      });
-    }
+    this.observables.loadingMarkers(property, value);
+    this.observables.getMarkers$.subscribe(markers=>{
+      this.mapService.placeArrayMarkers(markers, this.selectedCategoriesUID);      
+    });
   }
 
   clearMarkers(){
     this.mapService.deleteMarkers();
-    this.subscribingToDataService.deleteMarkers();
   }
 
   openMenu(uidCategory){
@@ -87,7 +82,8 @@ export class MenuService {
 
   showMenu(){
     return new Promise<boolean>((resolve, reject) => {
-      $('.left-menu').animate({marginLeft:0 - $(".left-menu").width() + $(".tabs nav").width()}, 200,
+      $('.left-menu').animate({marginLeft:0 - $(".left-menu").width() + 
+        $(".menu-container .menu-categories").width()}, 200,
         ()=>resolve(true));
     });     
   }

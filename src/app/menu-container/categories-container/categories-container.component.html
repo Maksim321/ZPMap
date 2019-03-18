@@ -1,0 +1,10 @@
+  <nav class="menu-categories">
+    <a *ngFor='let category of observables.getCategories$ | async'
+       (click)="openOrCloseMenu(category.uidCategory)"
+       [class.selected]="category.uidCategory == menuService.getSelectedCategoriesUID"
+       [title]='category.NameCategories'>
+      <img class="first" [src]='category.UrlImageCategories+"_black_72px.png"'/>
+      <img class="second" [src]='category.UrlImageCategories+"_white_72px.png"'/>
+    </a>
+  </nav>
+

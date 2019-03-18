@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService, MessageService, ModalDialogService } from "../core";
-
-import * as $ from 'jquery';
+import { User } from "../core";
 
 @Component({
   selector: 'app-login-form',
@@ -11,6 +10,9 @@ import * as $ from 'jquery';
 })
 export class LoginFormComponent implements OnInit {
 
+  userForm:User = {displayName:'',
+                   email:'',
+                   password:''}
   isRegister:boolean = false;
   constructor(public modalDialogService: ModalDialogService,
               private authService: AuthService,

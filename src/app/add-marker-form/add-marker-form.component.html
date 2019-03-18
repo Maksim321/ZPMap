@@ -1,37 +1,35 @@
-<form #dataForm="ngForm" (ngSubmit)="onSubmit(dataForm)">
-  <div class="content-page-body-row">
-    <label for="title">Название</label>
+<form calss="marker-form" #dataForm="ngForm" (ngSubmit)="onSubmit(dataForm)">
+  <div class="marker-form__row">
+    <label class="marker-form__label" for="title">Название</label>
     <input id="title" type="text" value="" name="Title"  ngModel>
   </div>
-  <div class="content-page-body-row">
-    <label for="category">Категория</label>
+  <div class="marker-form__row">
+    <label class="marker-form__label" for="category">Категория</label>
     <select (change)="onChange($event.target.value)" id="list-categories" name="uidCategory" ngModel>
-      <option *ngFor='let category of subscribingToDataService.getSelectedCategories' [value]='category.uidCategory' value='category.uidCategory'>{{category.NameCategories}}</option>
+      <option *ngFor="let category of categories$ | async" [value]="category.uidCategory">{{category.NameCategories}}</option>
     </select>
   </div>
-  <div class="content-page-body-row">
-    <label for="subcategory">Подкатегория</label>
+  <div class="marker-form__row">
+    <label class="marker-form__label" for="subcategory">Подкатегория</label>
     <select name="uidSubcategory" ngModel>
-      <ng-container *ngFor='let subcategory of subscribingToDataService.getSelectedSubcategories'>
-        <option [value]='subcategory.uidSubcategory'>{{subcategory.NameSubcategories}}</option>
-      </ng-container>
+      <option *ngFor="let subcategory of subcategories$ | async" [value]='subcategory.uidSubcategory'>{{subcategory.NameSubcategories}}</option>
     </select>
   </div>
-  <div class="content-page-body-row">
-    <label for="about">Описание</label>
-    <textarea id="description" name="Description"  ngModel></textarea>
+  <div class="marker-form__row">
+    <label class="marker-form__label" for="about">Описание</label>
+    <textarea class="marker-form__textarea" id="description" name="Description"  ngModel></textarea>
   </div>
-  <div class="content-page-body-row">
-    <label for="address">Адрес</label>
-    <textarea id="address" *ngIf='mapService.getcurrentMarker' value="{{mapService.getcurrentMarker.Address}}" name="Address"  disabled></textarea>
+  <div class="marker-form__row">
+    <label class="marker-form__label" for="address">Адрес</label>
+    <textarea class="marker-form__textarea" id="address" *ngIf='mapService.getcurrentMarker' value="{{mapService.getcurrentMarker.Address}}" name="Address"  disabled></textarea>
   </div>
-  <div class="content-page-body-row">
-    <label for="file-input">Загрузить изображение</label>
+  <div class="marker-form__row">
+    <label class="marker-form__label" for="file-input">Загрузить изображение</label>
     <input class="file-input" name="Image"
             type="file" accept="image/jpg, image/jpeg, image/png, image/gif" 
             (change)="savePhoto($event.target.files)">
   </div>
-  <div class="content-page-body-row">
-    <button type="submit" >Добавить</button>
+  <div class="marker-form__row">
+    <button class="marker-form__submit" type="submit" >Добавить</button>
   </div>
 </form>

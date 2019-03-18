@@ -10,7 +10,7 @@
 <div class="container">
   <app-edit-mode-info *ngIf="editModeInfoService.getEditModeState"></app-edit-mode-info>
   <div class="left-menu">
-	  <app-left-menu></app-left-menu>
+    <app-menu-container></app-menu-container>
   </div>	
   <div class="map" (click)="clickOnMap()">
 	  <app-map-layer></app-map-layer>   
@@ -18,6 +18,6 @@
 
   <div class="add-marker-button">
     <span>ADD</span>
-    <a class="edit-mode-link" *ngIf="authService.loggedIn !== null" (click)="runEditMode()">Добавить метку</a>
+    <a class="edit-mode-link" (click)="runEditMode()">Добавить метку</a>
   </div>
 </div>

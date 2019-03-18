@@ -10,10 +10,15 @@ export class MapService {
   private markers: Array<any> = [];
   private geocoder: any;
   private currentMarker: Point = { Address: '', Lat: 0, Lon: 0, };
+  private categories: Categories[];
+  private subcategories: Subcategories[];
 
   constructor(private ngZone: NgZone,
               private apiService: ApiService) {
 	  this.geocoder = new google.maps.Geocoder();
+    this.apiService.getCategories$().subscribe(categories=> {
+      this.categories = categories;
+    });
   }
   
 
@@ -63,15 +68,12 @@ export class MapService {
         }
       });
     });
-  }  
-  
+  }
+
   setMarker(point:Point){
-    return new Promise<any>((resolve, reject) => {
-      resolve(new google.maps.Marker({ 
+    return new google.maps.Marker({ 
               position: new google.maps.LatLng(point.Lat, point.Lon),
-              map: this.map})
-      );
-    });
+              map: this.map});
   }
   
   private setInfoWindowMap(marker, contentString){
@@ -94,13 +96,6 @@ export class MapService {
     this.getMap.panTo(new google.maps.LatLng(point.Lat, point.Lon));
     this.getMap.setZoom(17);
   }
-  
-  private getCategoryName(categories, uidCategory:string){
-    for(let category of categories){
-      if(category.uidCategory === uidCategory)
-        return category.NameCategories;
-    }
-  }
 
   private getSubcategoryName(subcategories, uidSubcategory:string){
     for(let subcategory of subcategories){
@@ -110,27 +105,22 @@ export class MapService {
     }
   }
 
-  private checkImage(image){
-    return new Promise<any>((resolve, reject) => {
-      if(image){
-        this.apiService.convertImage(image).subscribe(value=>{
-          resolve(value);
-        });
-      }else{
-        resolve("assets/img/no_photo.jpg");
-      }      
-    });    
+  private async checkImage(image){
+    return image?
+        this.apiService.convertImage(image).toPromise():"assets/img/no_photo.jpg";
+          
   }
 
-  placeArrayMarkers(arrayMarkets:Marker[], categories, subcategories) {
-    let markers = [];
-    arrayMarkets.forEach(marker=>{
-      this.setMarker(marker.Point).then((point)=>{
-        markers.push(point);
+  placeArrayMarkers(arrayMarkets:Marker[], uidCategory) {
+    this.deleteMarkers();
+    this.apiService.getSubcategories$(uidCategory).subscribe(subcategories=> {
+      arrayMarkets.forEach(marker=>{
+        let point = this.setMarker(marker.Point);
+        this.markers.push(point);
         this.checkImage(marker.Image).then((image)=>{
           this.setInfoWindowMap(point, 
             this.createHtmlContent(marker,
-              this.getCategoryName(categories, marker.uidCategory),
+              this.categories.find(category=>category.uidCategory == uidCategory).NameCategories,
               this.getSubcategoryName(subcategories, marker.uidSubcategory), 
               image
             )
@@ -138,8 +128,6 @@ export class MapService {
         });        
       });
     });
-    this.deleteMarkers();
-    this.markers = markers;
   }
 
   private createHtmlContent(marker:Marker, categories:string,subcategories:string, image){

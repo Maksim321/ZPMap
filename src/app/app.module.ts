@@ -11,9 +11,7 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { MapLayerComponent } from './map-layer/map-layer.component';
-import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
-import { CardPointComponent } from './card-point/card-point.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
@@ -22,6 +20,7 @@ import { AlertComponent } from './alert/alert.component';
 import { EditModeInfoComponent } from './edit-mode-info/edit-mode-info.component';
 
 import { CoreModule } from './core/core.module';
+import { MenuContainerModule } from './menu-container/menu-container.module';
 
 
 
@@ -29,9 +28,7 @@ import { CoreModule } from './core/core.module';
   declarations: [
     AppComponent,
     MapLayerComponent,
-    LeftMenuComponent,
     ModalDialogComponent,
-    CardPointComponent,
     HeaderComponent,
     LoginFormComponent,
     LoadingSpinnerComponent,
@@ -46,7 +43,8 @@ import { CoreModule } from './core/core.module';
   	AngularFireStorageModule,
     AngularFirestoreModule,
   	AngularFireAuthModule,
-    CoreModule
+    CoreModule,
+    MenuContainerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

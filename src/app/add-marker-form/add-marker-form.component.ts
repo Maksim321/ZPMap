@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ApiService, AuthService, MapService, MessageService, ModalDialogService, 
-  SubscribingToDataService, Categories, Subcategories } from "../core";
+  ObservablesService } from "../core";
+import { Categories, Subcategories } from "../core";
+  import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,23 +12,23 @@ import { ApiService, AuthService, MapService, MessageService, ModalDialogService
   styleUrls: ['./add-marker-form.component.css']
 })
 export class AddMarkerFormComponent implements OnInit { 
+  categories$: Observable<Categories[]>;
+  subcategories$: Observable<Subcategories[]>;
   file: any;
-  selectedCategories: Categories[];
-  selectedSubcategories: Subcategories[];
-  selectedCategoriesID:string;
 
-  constructor(public subscribingToDataService: SubscribingToDataService,
+  constructor(public observables: ObservablesService,
               public modalDialogService: ModalDialogService,
               private authService: AuthService,
               private apiService: ApiService,
               private messageService: MessageService,
               public mapService: MapService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.categories$ = this.apiService.getCategories$();
+  }
 
-  onChange(changedValue){
-    this.selectedCategoriesID = changedValue;
-    this.subscribingToDataService.selectSubcategories(changedValue);
+  onChange(uidCategory){
+    this.subcategories$ = this.apiService.getSubcategories$(uidCategory);
   }
 
   savePhoto(event) {
