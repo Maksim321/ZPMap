@@ -55,11 +55,13 @@ strong {
   background-image: url("/assets/img/zp_logo.svg");
 }
 
-.link-container__list .git-link{
+.link-container__list 
+.link-container__git-link{
   background-image: url("/assets/img/git_icon-black.png");
 }
 
-.link-container__list .git-link:hover{
+.link-container__list 
+.link-container__git-link:hover{
   background-image: url("/assets/img/git_icon-white.png");
 }
 
@@ -164,7 +166,8 @@ strong {
     font-size: 30px;
   }
 
-  .link-container__list .git-link{
+  .link-container__list 
+  .link-container__git-link{
     padding:8px;
     width: 70px;
   }
