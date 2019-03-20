@@ -7,7 +7,10 @@
   vertical-align: middle;
   font-family: sans-serif;
   opacity: 0;
-  border-radius: 5px; 
+  border-radius: 5px;
+  animation-name: modal_form_show;
+  animation-fill-mode: both;
+  animation-duration: 0.5s;  
 }
 
 #modal_close {
@@ -35,17 +38,38 @@
 	padding:5px 20px;
 }
 
-#overlay {
+.overlay {
   z-index:10;
   position:fixed;
   background-color:#000;
-  opacity:0.7; 
-  -moz-opacity:0.7;
+  opacity: 0;
   width:100%; 
   height:100%;
   top:0; 
   left:0;
-  display:none;  	
+  animation-name: overlay_show;
+  animation-fill-mode: both; 	
+  animation-duration: 0.5s;
+}
+
+@keyframes modal_form_show {
+  from {
+    top: 0px; 
+    opacity:0; 
+  }
+  to {
+    top: 50%; 
+    opacity:1; 
+  }
+}
+
+@keyframes overlay_show {
+  from {
+    opacity:0; 
+  }
+  to {
+    opacity:0.7; 
+  }
 }
 
 @media screen and (max-width:479px) {

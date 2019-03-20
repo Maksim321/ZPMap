@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as $ from 'jquery';
 
 @Injectable()
 export class ModalDialogService {
@@ -45,13 +44,9 @@ export class ModalDialogService {
   closeLoginForm() { this.isOpenLoginForm = false; }
   closeAddMarkerForm() { this.isOpenAddMarkerForm = false; }
   closeModalForm() {
-    $('.modal_form').animate({opacity: 0, top: '30%'}, 300, ()=>{ 
-      $('#overlay').fadeOut(300,()=>{
-        this.setSpinnerStatus = false;
-        this.isOpenModalForm = false; 
-        this.closeLoginForm();
-        this.closeAddMarkerForm(); 
-      });
-    });
+    this.setSpinnerStatus = false;
+    this.isOpenModalForm = false; 
+    this.closeLoginForm();
+    this.closeAddMarkerForm();
   }
 }
