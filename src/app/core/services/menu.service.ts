@@ -60,10 +60,6 @@ export class MenuService {
     });
   }
 
-  clearMarkers(){
-    this.mapService.deleteMarkers();
-  }
-
   openMenu(uidCategory){
     this.setMenuStatus = true;
     this.setSelectedSubcategoriesUID = "";

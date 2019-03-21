@@ -3,7 +3,10 @@
 }
 
 .subcategoriesList{
-  padding:10px;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .subcategoriesList_radio{
@@ -31,9 +34,10 @@
 }
 
 .subcategoriesButton{
-  padding: 10px 0;
+  padding: 10px 15px;
   width: 100%;
-  text-align: center;
+  box-sizing: border-box;
+  text-align: right;
 }
 
 .subcategoriesButton button{
