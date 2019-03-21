@@ -15,9 +15,7 @@ export class EditModeInfoComponent implements OnInit {
   			      private menuService: MenuService) { }
 
   ngOnInit() {
-  	this.menuService.hideMenu().then(()=>{
-      $('.add-marker-info').animate({opacity: 0.9}, 200);
-    });
+  	this.menuService.hideMenu();
 
     $('.map').mousemove((e)=>{
       $(".current-point-info").css( "top" , (e.clientY + -90) + 'px');
@@ -26,10 +24,8 @@ export class EditModeInfoComponent implements OnInit {
   }
 
   cancelEditMode(){
-  	$('.add-marker-info').animate({opacity: 0}, 200,()=>{
-      this.editModeInfoService.cancelEditMode();
-  	  this.menuService.showMenu();
-  	});
+    this.editModeInfoService.cancelEditMode();
+  	this.menuService.showMenu();
   }  
 
 }

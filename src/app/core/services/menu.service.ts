@@ -72,19 +72,14 @@ export class MenuService {
   }
 
   hideMenu(){
-    return new Promise<boolean>((resolve, reject) => {
-      $('.left-menu').animate({marginLeft: - $(".left-menu").width()},200,()=>{
-        this.setMenuStatus = false;
-        resolve(true)
-      });
+    $('.left-menu').animate({marginLeft: - $(".left-menu").width()},200,()=>{
+       this.setMenuStatus = false;
     });     
   }
 
   showMenu(){
-    return new Promise<boolean>((resolve, reject) => {
-      $('.left-menu').animate({marginLeft:0 - $(".left-menu").width() + 
-        $(".menu-container .menu-categories").width()}, 200,
-        ()=>resolve(true));
-    });     
+    $('.left-menu').animate({
+      marginLeft:0 - $(".left-menu").width() + $(".menu-container .menu-categories").width()
+    }, 200);    
   }
 }

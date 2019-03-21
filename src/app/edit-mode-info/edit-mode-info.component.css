@@ -7,6 +7,10 @@
   opacity:0;
   font: 16px sans-serif;
   font-weight: 600;
+  animation-name: add-marker-info_show;
+  animation-duration: .3s;
+  animation-delay: .3s;
+  animation-fill-mode: both;
 }
 
 .add-marker-info-text{
@@ -70,6 +74,15 @@
   border-top: none;
   border-left: none;
   background: #fff;
+}
+
+@keyframes add-marker-info_show{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 0.9;
+  }
 }
 
 
